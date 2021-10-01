@@ -24,4 +24,9 @@ public class Main {
             ex.printStackTrace();
         }
     }
+
+    private static void setUpPlayer(){
+        //Name, Ships positon
+
+    }
 }

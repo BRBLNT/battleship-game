@@ -1,8 +1,8 @@
 package hu.nye.progtech.battleship;
 
 public class Board {
-    int[][] martixForBoard;
-    int[] cellsTitleHorizontal;
-    char[] cellsTitleVertical;
+    private int[][] martixForBoard;
+    private int[] cellsTitleHorizontal;
+    private char[] cellsTitleVertical;
 
 }
