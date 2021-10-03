@@ -41,6 +41,9 @@ public class Player {
 
     public void setNumberOfShips(int numberOfShips) {
         this.numberOfShips = numberOfShips;
+        for (int i = 1; i <= numberOfShips; i++){
+            ships.add(new Ship(i));
+        }
     }
 
     public ArrayList<Ship> getShips() {
