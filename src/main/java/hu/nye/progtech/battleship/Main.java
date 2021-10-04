@@ -1,5 +1,7 @@
 package hu.nye.progtech.battleship;
-
+/*
+* boolean tomb boardhoz finalozni
+* */
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +12,8 @@ import com.indvd00m.ascii.render.api.ICanvas;
 import com.indvd00m.ascii.render.api.IContextBuilder;
 import com.indvd00m.ascii.render.api.IRender;
 import com.indvd00m.ascii.render.elements.PseudoText;
+import hu.nye.progtech.battleship.model.Board;
+import hu.nye.progtech.battleship.model.Player;
 
 
 public class Main {
@@ -34,6 +38,7 @@ public class Main {
         player.setName(getPlayerName());
         player.setBoard(board);
         player.setNumberOfShips(numberOfShips);
+        player.setShipsSize(numberOfShips);
         player.getBoard().drawEmptyBoard();
         System.out.println("\nAz alábbi táblán a kezdő- és végpozició megadásával állíthatod be a hajóidat! (minta: A1:A3)");
         System.out.println("\nA hajóid száma a következő:" + player.getNumberOfShips());

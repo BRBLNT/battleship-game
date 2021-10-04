@@ -1,4 +1,7 @@
-package hu.nye.progtech.battleship;
+package hu.nye.progtech.battleship.model;
+
+import hu.nye.progtech.battleship.model.Board;
+import hu.nye.progtech.battleship.model.Ship;
 
 import java.util.ArrayList;
 
@@ -41,8 +44,11 @@ public class Player {
 
     public void setNumberOfShips(int numberOfShips) {
         this.numberOfShips = numberOfShips;
+    }
+    public void setShipsSize(int numberOfShips){
+        ships = new ArrayList<>();
         for (int i = 1; i <= numberOfShips; i++){
-            ships.add(new Ship(i));
+            this.ships.add(new Ship(i));
         }
     }
 

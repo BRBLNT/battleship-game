@@ -1,4 +1,4 @@
-package hu.nye.progtech.battleship;
+package hu.nye.progtech.battleship.model;
 
 public class Ship {
     private int posX;

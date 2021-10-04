@@ -1,9 +1,9 @@
-package hu.nye.progtech.battleship;
+package hu.nye.progtech.battleship.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Board implements Draw{
+public class Board implements Draw {
     private char[][] matrixForBoard;
     private ArrayList<Integer> cellsTitleHorizontal;
     private ArrayList<Character> cellsTitleVertical;
