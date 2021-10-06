@@ -11,6 +11,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.8.1</version>
@@ -96,7 +102,10 @@
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>hu/nye/progtech/sudoku/Main.*</exclude>
+                        <exclude>hu/nye/progtech/battleship/model/Ship.*</exclude>
+                        <exclude>hu/nye/progtech/battleship/model/Player.*</exclude>
+                        <exclude>hu/nye/progtech/battleship/model/Board.*</exclude>
+                        <exclude>hu/nye/progtech/battleship/model/Draw.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

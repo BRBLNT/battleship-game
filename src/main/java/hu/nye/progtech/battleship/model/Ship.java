@@ -1,9 +1,9 @@
 package hu.nye.progtech.battleship.model;
 
-public class Ship {
+public final class Ship {
     private int posX;
     private int posY;
-    private int size;
+    private final int size;
 
     public Ship(int size) {
         this.size = size;
@@ -33,10 +33,6 @@ public class Ship {
 
     public int getSize() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     @Override

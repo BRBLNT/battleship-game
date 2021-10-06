@@ -3,15 +3,11 @@ package hu.nye.progtech.battleship.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Board implements Draw {
+public final class Board implements Draw {
     private char[][] matrixForBoard;
-    private ArrayList<Integer> cellsTitleHorizontal;
-    private ArrayList<Character> cellsTitleVertical;
-    private int boardSize;
-
-    public Board(){
-
-    }
+    private final ArrayList<Integer> cellsTitleHorizontal;
+    private final ArrayList<Character> cellsTitleVertical;
+    private final int boardSize;
 
     /**
      * 0 - empty slot
@@ -30,9 +26,6 @@ public class Board implements Draw {
                 this.matrixForBoard[i][j] = '0';
             }
         }
-
-
-
     }
 
     public char[][] getMatrixForBoard() {
@@ -47,16 +40,8 @@ public class Board implements Draw {
         return cellsTitleHorizontal;
     }
 
-    public void setCellsTitleHorizontal(ArrayList<Integer> cellsTitleHorizontal) {
-        this.cellsTitleHorizontal = cellsTitleHorizontal;
-    }
-
     public ArrayList<Character> getCellsTitleVertical() {
         return cellsTitleVertical;
-    }
-
-    public void setCellsTitleVertical(ArrayList<Character> cellsTitleVertical) {
-        this.cellsTitleVertical = cellsTitleVertical;
     }
 
     @Override
@@ -69,7 +54,7 @@ public class Board implements Draw {
     }
 
     @Override
-    public void drawEmptyBoard() {
+    public void drawBoard() {
         System.out.print(" ");
         for (int i = 0; i < boardSize; i++){
             System.out.print(" "+cellsTitleHorizontal.get(i));
