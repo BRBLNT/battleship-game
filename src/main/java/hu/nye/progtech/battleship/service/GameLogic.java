@@ -11,7 +11,6 @@ import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundExcepti
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
 

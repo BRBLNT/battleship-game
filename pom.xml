@@ -91,21 +91,15 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
-    </build>
 
-    <reporting>
-        <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>hu/nye/progtech/battleship/model/Ship.*</exclude>
-                        <exclude>hu/nye/progtech/battleship/model/Player.*</exclude>
-                        <exclude>hu/nye/progtech/battleship/model/Board.*</exclude>
-                        <exclude>hu/nye/progtech/battleship/model/Draw.*</exclude>
+                        <exclude>hu/nye/progtech/sudoku/Main.*</exclude>
+                        <exclude>hu/nye/progtech/sudoku/model/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -143,6 +137,11 @@
                     </execution>
                 </executions>
             </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
