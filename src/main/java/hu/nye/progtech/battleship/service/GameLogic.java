@@ -18,14 +18,13 @@ public class GameLogic {
     /*
     Variables
      */
-    private static Properties prop = new Properties();
+    private final static Properties prop = new Properties();
     private static Player player;
     private static String setName;
-    private static String changeName;
     private static String startGame;
     private static String setShips;
     private static String exit;
-
+    private static boolean isShipsSet = false;
     /*
     Values set
      */
@@ -57,7 +56,6 @@ public class GameLogic {
         System.out.println(prop.getProperty("game.text.choose"));
         System.out.println(prop.getProperty("game.text.type")+" "+startGame+" "+prop.getProperty("game.text.start"));
         System.out.println(prop.getProperty("game.text.type")+" "+setName+" "+prop.getProperty("game.text.setname"));
-        System.out.println(prop.getProperty("game.text.type")+" "+changeName+" "+prop.getProperty("game.text.changeName"));
         System.out.println(prop.getProperty("game.text.type")+" "+setShips+" "+prop.getProperty("game.text.setships"));
         System.out.println(prop.getProperty("game.text.type")+" "+exit+" "+prop.getProperty("game.text.exit"));
 
@@ -73,14 +71,12 @@ public class GameLogic {
             readProperties("config.properties");
         } catch (ConfigurationNotFoundException e) {
             e.printStackTrace();
+            System.exit(1);
         }
         setName = prop.getProperty("game.controll.setname");
-        changeName = prop.getProperty("game.controll.changename");
         startGame = prop.getProperty("game.controll.start");
         setShips = prop.getProperty("game.controll.setships");
         exit = prop.getProperty("game.controll.exit");
-
-
         player = createPlayer();
         welcomeText();
 
@@ -102,10 +98,6 @@ public class GameLogic {
                 setName();
                 run = false;
             }
-            else if(command.equals(changeName)){
-                changeName();
-                run = false;
-            }
             else if(command.equals(setShips)){
                 setShip();
                 run = false;
@@ -124,18 +116,16 @@ public class GameLogic {
             System.out.println(prop.getProperty("game.text.namenotset"));
             chooseMenu();
         }
+        else if(!isShipsSet){
+            System.out.println(prop.getProperty("game.text.shipnotset"));
+            chooseMenu();
+        }
         else{
             player.getBoard().drawBoard();
         }
 
     }
     private static void setName(){
-        player.setName(getPlayerName());
-        if(player.getName() != null){
-            chooseMenu();
-        }
-    }
-    private static void changeName(){
         player.setName(getPlayerName());
         if(player.getName() != null){
             chooseMenu();
@@ -152,8 +142,7 @@ public class GameLogic {
     Methods
      */
     private static Player createPlayer(){
-        Player tmp = new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.boardSize"))),Integer.parseInt(prop.getProperty("board.setting.numberOfShips")));
-        return tmp;
+        return new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.boardSize"))),Integer.parseInt(prop.getProperty("board.setting.numberOfShips")));
     }
 
     private static String getPlayerName() {
