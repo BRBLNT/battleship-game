@@ -1,9 +1,11 @@
 package hu.nye.progtech.battleship.model;
 
+import hu.nye.progtech.battleship.service.draw.Draw;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class Board implements Draw {
+public final class Board{
     private char[][] matrixForBoard;
     private final ArrayList<Integer> cellsTitleHorizontal;
     private final ArrayList<Character> cellsTitleVertical;
@@ -44,6 +46,10 @@ public final class Board implements Draw {
         return cellsTitleVertical;
     }
 
+    public int getBoardSize() {
+        return boardSize;
+    }
+
     @Override
     public String toString() {
         return "Board{" +
@@ -53,24 +59,5 @@ public final class Board implements Draw {
                 '}';
     }
 
-    @Override
-    public void drawBoard() {
-        System.out.print(" ");
-        for (int i = 0; i < boardSize; i++){
-            System.out.print(" "+cellsTitleHorizontal.get(i));
-        }
-        System.out.println("");
-        for (int i = 0; i < boardSize; i++){
-            System.out.print(cellsTitleVertical.get(i));
-            System.out.print("|");
-            for (int j = 0; j < boardSize; j++){
-                System.out.print(matrixForBoard[i][j] +"|");
-            }
-            System.out.println("");
-            for(int j = 0; j < boardSize; j++) {
-                System.out.print(" -");
-            }
-            System.out.println("");
-        }
-    }
+
 }

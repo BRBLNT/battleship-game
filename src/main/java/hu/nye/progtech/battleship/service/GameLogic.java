@@ -7,6 +7,7 @@ import com.indvd00m.ascii.render.api.IRender;
 import com.indvd00m.ascii.render.elements.PseudoText;
 import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.model.Player;
+import hu.nye.progtech.battleship.service.draw.impl.CommandLineDraw;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
 
 import java.io.IOException;
@@ -121,7 +122,7 @@ public class GameLogic {
             chooseMenu();
         }
         else{
-            player.getBoard().drawBoard();
+            new CommandLineDraw().drawBoard(player.getBoard());
         }
 
     }
