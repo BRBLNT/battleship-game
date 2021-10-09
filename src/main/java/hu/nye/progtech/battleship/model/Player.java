@@ -3,9 +3,9 @@ package hu.nye.progtech.battleship.model;
 import java.util.ArrayList;
 
 public class Player {
-    private String Name;
     private final Board board;
     private final int numberOfShips;
+    private String Name;
     private ArrayList<Ship> ships;
 
     public Player(Board board, int numberOfShips) {
@@ -31,8 +31,8 @@ public class Player {
         return numberOfShips;
     }
 
-    private void shipsArraySize(int numberOfShips){
-        for (int i = 1; i <= numberOfShips; i++){
+    private void shipsArraySize(int numberOfShips) {
+        for (int i = 1; i <= numberOfShips; i++) {
             this.ships.add(new Ship(i));
         }
     }

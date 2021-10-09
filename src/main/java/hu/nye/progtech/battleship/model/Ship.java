@@ -1,9 +1,9 @@
 package hu.nye.progtech.battleship.model;
 
 public final class Ship {
+    private final int size;
     private int posX;
     private int posY;
-    private final int size;
 
     public Ship(int size) {
         this.size = size;
