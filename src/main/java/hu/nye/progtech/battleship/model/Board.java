@@ -1,7 +1,5 @@
 package hu.nye.progtech.battleship.model;
 
-import hu.nye.progtech.battleship.service.draw.Draw;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 

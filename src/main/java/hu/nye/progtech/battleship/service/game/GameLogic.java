@@ -1,4 +1,4 @@
-package hu.nye.progtech.battleship.service;
+package hu.nye.progtech.battleship.service.game;
 
 import com.indvd00m.ascii.render.Render;
 import com.indvd00m.ascii.render.api.ICanvas;
@@ -7,8 +7,8 @@ import com.indvd00m.ascii.render.api.IRender;
 import com.indvd00m.ascii.render.elements.PseudoText;
 import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.model.Player;
-import hu.nye.progtech.battleship.service.draw.impl.CommandLineDraw;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
+import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDraw;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +51,15 @@ public class GameLogic {
         System.out.println(prop.getProperty("game.text.actual.version")+" "+ prop.getProperty("game.settings.version"));
         System.out.println(s);
         System.out.print(prop.getProperty("game.text.welcome")+"\n");
+    }
+    private static void exitText(){
+        IRender render = new Render();
+        IContextBuilder builder = render.newBuilder();
+        builder.width(120).height(20);
+        builder.element(new PseudoText(prop.getProperty("game.text.exittext")));
+        ICanvas canvas = render.render(builder.build());
+        String s = canvas.getText();
+        System.out.println(s);
     }
 
     private static void menuText(){
@@ -132,8 +141,12 @@ public class GameLogic {
             chooseMenu();
         }
     }
-    private static void setShip(){}
+    private static void setShip(){
+        new CommandLineDraw().drawBoard(player.getBoard());
+        System.out.println(prop.getProperty("game.text.setshipinfo"));
+    }
     private static void exit(){
+        exitText();
         System.exit(0);
     }
 

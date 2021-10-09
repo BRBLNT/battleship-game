@@ -1,4 +1,4 @@
-package hu.nye.progtech.battleship.service.draw;
+package hu.nye.progtech.battleship.ui.draw;
 
 import hu.nye.progtech.battleship.model.Board;
 
