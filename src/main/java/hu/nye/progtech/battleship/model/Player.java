@@ -3,7 +3,7 @@ package hu.nye.progtech.battleship.model;
 import java.util.ArrayList;
 
 public class Player {
-    private final Board board;
+    private Board board;
     private final int numberOfShips;
     private String Name;
     private ArrayList<Ship> ships;
@@ -36,7 +36,9 @@ public class Player {
             this.ships.add(new Ship(i));
         }
     }
-
+    public void setBoard(Board board) {
+        this.board = board;
+    }
     public ArrayList<Ship> getShips() {
         return ships;
     }

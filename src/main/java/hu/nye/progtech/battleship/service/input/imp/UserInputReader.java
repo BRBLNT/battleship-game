@@ -1,12 +1,12 @@
-package hu.nye.progtech.battleship.service.input;
+package hu.nye.progtech.battleship.service.input.imp;
 
-import java.io.IOException;
 import java.util.Scanner;
 
+import hu.nye.progtech.battleship.service.input.UserInput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UserInputReader {
+public class UserInputReader implements UserInput{
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInputReader.class);
 
     private final Scanner reader;
@@ -15,9 +15,9 @@ public class UserInputReader {
         this.reader = reader;
     }
 
+    @Override
     public String readInput() {
         String input = null;
-
         try {
             input = reader.nextLine();
         } catch (Exception e) {

@@ -11,7 +11,6 @@ public final class Board {
 
     /**
      * 0 - empty slot
-     * 1 - ship
      */
     public Board(int sizeX) {
         this.boardSize = sizeX;

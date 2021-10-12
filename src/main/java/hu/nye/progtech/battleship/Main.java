@@ -1,10 +1,10 @@
 package hu.nye.progtech.battleship;
 
-import hu.nye.progtech.battleship.service.game.GameLogic;
+import hu.nye.progtech.battleship.service.game.GameController;
 
 public class Main {
     public static void main(String[] args) {
-        GameLogic gl = new GameLogic();
+        GameController gl = new GameController();
         gl.init("config.properties");
         gl.chooseMenu();
     }
