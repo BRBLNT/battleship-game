@@ -3,6 +3,10 @@ package hu.nye.progtech.battleship.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Board implementation.
+ * with title of cells and a matrix for a visualization.
+ */
 public final class Board {
     private final ArrayList<Integer> cellsTitleHorizontal;
     private final ArrayList<Character> cellsTitleVertical;
@@ -10,7 +14,8 @@ public final class Board {
     private char[][] matrixForBoard;
 
     /**
-     * 0 - empty slot
+     * Constructor of board.
+     * 0 - empty slot.
      */
     public Board(int sizeX) {
         this.boardSize = sizeX;

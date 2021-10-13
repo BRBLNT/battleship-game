@@ -1,5 +1,10 @@
 package hu.nye.progtech.battleship.service.game;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import java.util.Scanner;
+
 import com.indvd00m.ascii.render.Render;
 import com.indvd00m.ascii.render.api.ICanvas;
 import com.indvd00m.ascii.render.api.IContextBuilder;
@@ -20,16 +25,12 @@ import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDraw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.Scanner;
-
+/**
+ * Game Controller use other classes to control the game process.
+ */
 public class GameController {
-    /*
-    Variables
-     */
-    private final static Properties prop = new Properties();
+
+    private static final Properties prop = new Properties();
     private static final UserInputReader uir = new UserInputReader(new Scanner(System.in));
     private static final PositionValidatorImpl positionValidator = new PositionValidatorImpl();
     private static final CoordinateConverter coordinateConverter = new CoordinateConverter();
@@ -42,9 +43,6 @@ public class GameController {
     private static String exit;
     private static boolean isShipsSet = false;
 
-    /*
-    Values set
-     */
     private static void readProperties(String namePropertiesFile) throws ConfigurationNotFoundException {
         try (InputStream input = GameController.class.getClassLoader().getResourceAsStream(namePropertiesFile)) {
             prop.load(input);
@@ -55,10 +53,6 @@ public class GameController {
         }
     }
 
-
-    /*
-    Messages
-     */
     private static void welcomeText() {
         IRender render = new Render();
         IContextBuilder builder = render.newBuilder();
@@ -90,11 +84,9 @@ public class GameController {
 
     }
 
-
-    /*
-    Runtime
+    /**
+     * Init properties file and menu commands.
      */
-
     public static void init(String config) {
         try {
             readProperties(config);
@@ -112,6 +104,9 @@ public class GameController {
 
     }
 
+    /**
+     * Show menu items, and we can choose when type the correct command.
+     */
     public static void chooseMenu() {
         menuText();
         String command;
@@ -164,12 +159,13 @@ public class GameController {
         new CommandLineDraw().drawBoard(player.getBoard());
         System.out.println(prop.getProperty("game.text.setshipinfo"));
         int i = 0;
-        do{
+        do {
             re:
             {
                 String line = uir.readInput();
                 try {
-                    positionValidator.validate(coordinateConverter.sizeCalculator(line), line, Integer.parseInt(prop.getProperty("board.setting.numberofships")));
+                    positionValidator.validate(coordinateConverter.sizeCalculator(line), line,
+                            Integer.parseInt(prop.getProperty("board.setting.numberofships")));
                 } catch (PositionNotValidForSizeException | CoordinateFormatException | NotValidPositionException e) {
                     LOGGER.warn("coordinates fault");
                     System.out.println(prop.getProperty("game.text.setshipwarn"));
@@ -186,11 +182,12 @@ public class GameController {
                         i++;
                     }
                 }
-                if (line.length() > 5 || !line.contains(":"))
+                if (line.length() > 5 || !line.contains(":")) {
                     System.out.println(prop.getProperty("game.text.setshipinfo"));
+                }
                 break re;
             }
-        }while (i!=player.getNumberOfShips());
+        } while (i != player.getNumberOfShips());
         isShipsSet = true;
         chooseMenu();
     }
@@ -202,11 +199,9 @@ public class GameController {
     }
 
 
-    /*
-    Methods
-     */
     private static Player createPlayer() {
-        return new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.boardsize"))), Integer.parseInt(prop.getProperty("board.setting.numberofships")));
+        return new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.boardsize"))),
+                Integer.parseInt(prop.getProperty("board.setting.numberofships")));
     }
 
     private static String getPlayerName() {
@@ -214,14 +209,13 @@ public class GameController {
         do {
             System.out.println(prop.getProperty("game.text.name.get"));
             readName = uir.readInput();
-            if (readName.length() < 3){
+            if (readName.length() < 3) {
                 System.out.println(prop.getProperty("game.text.name.lenght"));
                 LOGGER.warn("name length not enough");
             }
-        }
-        while (readName.length() < 3);
+        } while (readName.length() < 3);
         System.out.println(prop.getProperty("game.text.name.welcome") + " " + readName + "!\n");
-        LOGGER.info("name set successfully actual name:"+readName);
+        LOGGER.info("name set successfully actual name:" + readName);
         return readName;
     }
 

@@ -4,6 +4,9 @@ import hu.nye.progtech.battleship.service.exception.CoordinateFormatException;
 import hu.nye.progtech.battleship.service.exception.NotValidPositionException;
 import hu.nye.progtech.battleship.service.exception.PositionNotValidForSizeException;
 
+/**
+ * Position validator interface.
+ */
 public interface PositionValidator {
 
     void validFormat(String pos) throws CoordinateFormatException;
@@ -14,7 +17,8 @@ public interface PositionValidator {
 
     void checkLength(int size, String pos, int maxSize) throws PositionNotValidForSizeException;
 
-    void validate(int size, String pos, int maxSize) throws PositionNotValidForSizeException, CoordinateFormatException, NotValidPositionException;
+    void validate(int size, String pos, int maxSize)
+            throws PositionNotValidForSizeException, CoordinateFormatException, NotValidPositionException;
 
 
 }

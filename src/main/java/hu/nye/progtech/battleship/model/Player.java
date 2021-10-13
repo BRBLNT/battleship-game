@@ -2,10 +2,13 @@ package hu.nye.progtech.battleship.model;
 
 import java.util.ArrayList;
 
+/**
+ * Player implementation.
+ */
 public class Player {
     private Board board;
     private final int numberOfShips;
-    private String Name;
+    private String name;
     private ArrayList<Ship> ships;
 
     public Player(Board board, int numberOfShips) {
@@ -16,11 +19,11 @@ public class Player {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Board getBoard() {
@@ -36,9 +39,11 @@ public class Player {
             this.ships.add(new Ship(i));
         }
     }
+
     public void setBoard(Board board) {
         this.board = board;
     }
+
     public ArrayList<Ship> getShips() {
         return ships;
     }
@@ -50,7 +55,7 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "Name='" + Name + '\'' +
+                "Name='" + name + '\'' +
                 ", board=" + board +
                 ", numberOfShips=" + numberOfShips +
                 ", ships=" + ships +

@@ -1,5 +1,9 @@
 package hu.nye.progtech.battleship.model;
 
+/**
+ * Ship implementation.
+ * 2 coordination and size.
+ */
 public final class Ship {
     private final int size;
     private int posX;

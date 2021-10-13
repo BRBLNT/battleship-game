@@ -6,7 +6,10 @@ import hu.nye.progtech.battleship.service.input.UserInput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class UserInputReader implements UserInput{
+/**
+ * User input reader from command line.
+ */
+public class UserInputReader implements UserInput {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInputReader.class);
 
     private final Scanner reader;

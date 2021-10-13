@@ -2,10 +2,12 @@ package hu.nye.progtech.battleship.ui.draw.impl;
 
 import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.ui.draw.Draw;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Command line interface this class draw out the board.
+ */
 public class CommandLineDraw implements Draw {
     private static final String HORIZONTAL_SEPARATOR = " -";
     private static final String VERTICAL_SEPARATOR = "|";
