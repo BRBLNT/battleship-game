@@ -69,7 +69,7 @@ public class GameController {
         IRender render = new Render();
         IContextBuilder builder = render.newBuilder();
         builder.width(120).height(20);
-        builder.element(new PseudoText(prop.getProperty("game.text.exittext")));
+        builder.element(new PseudoText(prop.getProperty("game.text.exit.text")));
         ICanvas canvas = render.render(builder.build());
         String s = canvas.getText();
         System.out.println(s);
@@ -78,8 +78,8 @@ public class GameController {
     private static void menuText() {
         System.out.println(prop.getProperty("game.text.choose"));
         System.out.println(prop.getProperty("game.text.type") + " " + startGame + " " + prop.getProperty("game.text.start"));
-        System.out.println(prop.getProperty("game.text.type") + " " + setName + " " + prop.getProperty("game.text.setname"));
-        System.out.println(prop.getProperty("game.text.type") + " " + setShips + " " + prop.getProperty("game.text.setships"));
+        System.out.println(prop.getProperty("game.text.type") + " " + setName + " " + prop.getProperty("game.text.set.name"));
+        System.out.println(prop.getProperty("game.text.type") + " " + setShips + " " + prop.getProperty("game.text.set.ship"));
         System.out.println(prop.getProperty("game.text.type") + " " + exit + " " + prop.getProperty("game.text.exit"));
 
     }
@@ -94,10 +94,10 @@ public class GameController {
             e.printStackTrace();
             System.exit(1);
         }
-        setName = prop.getProperty("game.controll.setname");
-        startGame = prop.getProperty("game.controll.start");
-        setShips = prop.getProperty("game.controll.setships");
-        exit = prop.getProperty("game.controll.exit");
+        setName = prop.getProperty("game.control.set.name");
+        startGame = prop.getProperty("game.control.start");
+        setShips = prop.getProperty("game.control.set.ship");
+        exit = prop.getProperty("game.control.exit");
         player = createPlayer();
         welcomeText();
         LOGGER.info("initialization");
@@ -137,10 +137,10 @@ public class GameController {
 
     private static void startGame() {
         if (player.getName() == null) {
-            System.out.println(prop.getProperty("game.text.namenotset"));
+            System.out.println(prop.getProperty("game.text.name.notset"));
             chooseMenu();
         } else if (!isShipsSet) {
-            System.out.println(prop.getProperty("game.text.shipnotset"));
+            System.out.println(prop.getProperty("game.text.ship.notset"));
             chooseMenu();
         } else {
             new CommandLineDraw().drawBoard(player.getBoard());
@@ -157,7 +157,7 @@ public class GameController {
 
     private static void setShip() {
         new CommandLineDraw().drawBoard(player.getBoard());
-        System.out.println(prop.getProperty("game.text.setshipinfo"));
+        System.out.println(prop.getProperty("game.text.set.ship.info"));
         int i = 0;
         do {
             re:
@@ -168,8 +168,8 @@ public class GameController {
                             Integer.parseInt(prop.getProperty("board.setting.numberofships")));
                 } catch (PositionNotValidForSizeException | CoordinateFormatException | NotValidPositionException e) {
                     LOGGER.warn("coordinates fault");
-                    System.out.println(prop.getProperty("game.text.setshipwarn"));
-                    System.out.println(prop.getProperty("game.text.setshipinfo"));
+                    System.out.println(prop.getProperty("game.text.set.ship.warn"));
+                    System.out.println(prop.getProperty("game.text.set.ship.info"));
                     break re;
                 }
                 for (Ship ship : player.getShips()) {
@@ -178,12 +178,12 @@ public class GameController {
                         ship.setPosY(Integer.parseInt(positionValidator.convertPosition(line.split(":")[1])));
                         player.getBoard().setMatrixForBoard(boardModifier.modifyBoard(player.getBoard(), ship));
                         new CommandLineDraw().drawBoard(player.getBoard());
-                        System.out.println(prop.getProperty("game.text.shipadd"));
+                        System.out.println(prop.getProperty("game.text.ship.add"));
                         i++;
                     }
                 }
                 if (line.length() > 5 || !line.contains(":")) {
-                    System.out.println(prop.getProperty("game.text.setshipinfo"));
+                    System.out.println(prop.getProperty("game.text.set.ship.info"));
                 }
                 break re;
             }
@@ -200,7 +200,7 @@ public class GameController {
 
 
     private static Player createPlayer() {
-        return new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.boardsize"))),
+        return new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.board.size"))),
                 Integer.parseInt(prop.getProperty("board.setting.numberofships")));
     }
 
@@ -210,7 +210,7 @@ public class GameController {
             System.out.println(prop.getProperty("game.text.name.get"));
             readName = uir.readInput();
             if (readName.length() < 3) {
-                System.out.println(prop.getProperty("game.text.name.lenght"));
+                System.out.println(prop.getProperty("game.text.name.length"));
                 LOGGER.warn("name length not enough");
             }
         } while (readName.length() < 3);
