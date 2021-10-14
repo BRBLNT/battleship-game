@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 public class GameController {
 
     private static final Properties PROP = new Properties();
-    private static final UserInputReader UIR = new UserInputReader(new Scanner(System.in));
+    private static UserInputReader uir;
     private static final PositionValidatorImpl POSITION_VALIDATOR = new PositionValidatorImpl();
     private static final CoordinateConverter COORDINATE_CONVERTER = new CoordinateConverter();
     private static final BoardModifier BOARD_MODIFIER = new BoardModifier();
@@ -43,7 +43,7 @@ public class GameController {
     private static String exit;
     private static boolean isShipsSet = false;
 
-    private static void readProperties(String namePropertiesFile) throws ConfigurationNotFoundException {
+    static void readProperties(String namePropertiesFile) throws ConfigurationNotFoundException {
         try (InputStream input = GameController.class.getClassLoader().getResourceAsStream(namePropertiesFile)) {
             PROP.load(input);
             LOGGER.info("read config file successfully!");
@@ -87,7 +87,7 @@ public class GameController {
     /**
      * Init properties file and menu commands.
      */
-    public static void init(String config) {
+    public static void init(String config, UserInputReader uirp) {
         try {
             readProperties(config);
         } catch (ConfigurationNotFoundException e) {
@@ -99,6 +99,7 @@ public class GameController {
         setShips = PROP.getProperty("game.control.set.ship");
         exit = PROP.getProperty("game.control.exit");
         player = createPlayer();
+        uir = uirp;
         welcomeText();
         LOGGER.info("initialization");
 
@@ -112,7 +113,7 @@ public class GameController {
         String command;
         boolean run = true;
         do {
-            command = UIR.readInput().toUpperCase();
+            command = uir.readInput().toUpperCase();
             if (command.equals(startGame)) {
                 LOGGER.info("choose start");
                 startGame();
@@ -162,7 +163,7 @@ public class GameController {
         do {
             re:
             {
-                String line = UIR.readInput();
+                String line = uir.readInput();
                 try {
                     POSITION_VALIDATOR.validate(COORDINATE_CONVERTER.sizeCalculator(line), line,
                             Integer.parseInt(PROP.getProperty("board.setting.numberofships")));
@@ -208,7 +209,7 @@ public class GameController {
         String readName;
         do {
             System.out.println(PROP.getProperty("game.text.name.get"));
-            readName = UIR.readInput();
+            readName = uir.readInput();
             if (readName.length() < 3) {
                 System.out.println(PROP.getProperty("game.text.name.length"));
                 LOGGER.warn("name length not enough");
