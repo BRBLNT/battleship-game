@@ -9,15 +9,14 @@ import org.slf4j.LoggerFactory;
 /**
  * Command line interface this class draw out the board.
  */
-public class CommandLineDraw implements Draw {
+public class CommandLineDrawImpl implements Draw {
     private static final String HORIZONTAL_SEPARATOR = " -";
     private static final String VERTICAL_SEPARATOR = "|";
-    private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineDraw.class);
-    private final PrintWrapper printWrapper = new PrintWrapper();
+    private PrintWrapper printWrapper;
 
     @Override
     public void drawBoard(Board b) {
-        LOGGER.info("Printing map to stdout");
+        printWrapper = new PrintWrapper();
         printWrapper.print(" ");
         for (int i = 0; i < b.getBoardSize(); i++) {
             printWrapper.print(" " + b.getCellsTitleHorizontal().get(i));

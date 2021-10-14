@@ -101,6 +101,7 @@
                     <excludes>
                         <exclude>hu/nye/progtech/battleship/Main.*</exclude>
                         <exclude>hu/nye/progtech/battleship/model/*</exclude>
+                        <exclude>hu/nye/progtech/battleship/service/exception/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -21,7 +21,7 @@ import hu.nye.progtech.battleship.service.exception.PositionNotValidForSizeExcep
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.modify.BoardModifier;
 import hu.nye.progtech.battleship.service.validate.impl.PositionValidatorImpl;
-import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDraw;
+import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDrawImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -143,7 +143,7 @@ public class GameController {
             System.out.println(prop.getProperty("game.text.ship.notset"));
             chooseMenu();
         } else {
-            new CommandLineDraw().drawBoard(player.getBoard());
+            new CommandLineDrawImpl().drawBoard(player.getBoard());
         }
 
     }
@@ -156,7 +156,7 @@ public class GameController {
     }
 
     private static void setShip() {
-        new CommandLineDraw().drawBoard(player.getBoard());
+        new CommandLineDrawImpl().drawBoard(player.getBoard());
         System.out.println(prop.getProperty("game.text.set.ship.info"));
         int i = 0;
         do {
@@ -177,7 +177,7 @@ public class GameController {
                         ship.setPosX(Integer.parseInt(positionValidator.convertPosition(line.split(":")[0])));
                         ship.setPosY(Integer.parseInt(positionValidator.convertPosition(line.split(":")[1])));
                         player.getBoard().setMatrixForBoard(boardModifier.modifyBoard(player.getBoard(), ship));
-                        new CommandLineDraw().drawBoard(player.getBoard());
+                        new CommandLineDrawImpl().drawBoard(player.getBoard());
                         System.out.println(prop.getProperty("game.text.ship.add"));
                         i++;
                     }

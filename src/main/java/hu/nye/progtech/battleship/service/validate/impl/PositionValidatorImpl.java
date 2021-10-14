@@ -47,6 +47,7 @@ public final class PositionValidatorImpl implements PositionValidator {
             LOGGER.warn("pos contains illegal character");
             throw new CoordinateFormatException("Illegal character!");
         }
+        return;
     }
 
     @Override
