@@ -23,6 +23,9 @@ public final class PositionValidatorImpl implements PositionValidator {
         boolean secondIsNum = false;
         pos = pos.toUpperCase();
         String[] slices = pos.split(":");
+        if (slices.length < 2) {
+            throw new CoordinateFormatException("Wrong format");
+        }
         if (slices[0].length() >= 3 || slices[0].length() <= 0) {
             LOGGER.warn("pos contains too much character");
             throw new CoordinateFormatException("Too much character!");
@@ -53,6 +56,9 @@ public final class PositionValidatorImpl implements PositionValidator {
     @Override
     public void validPositionInline(String pos) throws NotValidPositionException {
         String[] slices = pos.split(":");
+        if (slices.length < 2) {
+            throw new NotValidPositionException("Wrong format");
+        }
         String posX = slices[0];
         String posY = slices[1];
         int posX1 = Integer.parseInt(String.valueOf(convertPosition(posX).charAt(0)));
@@ -88,6 +94,9 @@ public final class PositionValidatorImpl implements PositionValidator {
     @Override
     public void checkLength(int size, String pos, int maxSize) throws PositionNotValidForSizeException {
         String[] slices = pos.split(":");
+        if (slices.length < 2) {
+            throw new PositionNotValidForSizeException("Wrong format");
+        }
         int cordLength = 0;
         int posX1 = Integer.parseInt(String.valueOf(convertPosition(slices[0]).charAt(0)));
         int posX2 = Integer.parseInt(String.valueOf(convertPosition(slices[0]).charAt(1)));

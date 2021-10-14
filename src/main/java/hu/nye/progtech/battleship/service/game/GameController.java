@@ -30,11 +30,11 @@ import org.slf4j.LoggerFactory;
  */
 public class GameController {
 
-    private static final Properties prop = new Properties();
-    private static final UserInputReader uir = new UserInputReader(new Scanner(System.in));
-    private static final PositionValidatorImpl positionValidator = new PositionValidatorImpl();
-    private static final CoordinateConverter coordinateConverter = new CoordinateConverter();
-    private static final BoardModifier boardModifier = new BoardModifier();
+    private static final Properties PROP = new Properties();
+    private static final UserInputReader UIR = new UserInputReader(new Scanner(System.in));
+    private static final PositionValidatorImpl POSITION_VALIDATOR = new PositionValidatorImpl();
+    private static final CoordinateConverter COORDINATE_CONVERTER = new CoordinateConverter();
+    private static final BoardModifier BOARD_MODIFIER = new BoardModifier();
     private static final Logger LOGGER = LoggerFactory.getLogger(GameController.class);
     private static Player player;
     private static String setName;
@@ -45,7 +45,7 @@ public class GameController {
 
     private static void readProperties(String namePropertiesFile) throws ConfigurationNotFoundException {
         try (InputStream input = GameController.class.getClassLoader().getResourceAsStream(namePropertiesFile)) {
-            prop.load(input);
+            PROP.load(input);
             LOGGER.info("read config file successfully!");
         } catch (IOException ex) {
             LOGGER.error("configuration is missing!");
@@ -57,30 +57,30 @@ public class GameController {
         IRender render = new Render();
         IContextBuilder builder = render.newBuilder();
         builder.width(120).height(20);
-        builder.element(new PseudoText(prop.getProperty("game.text.name")));
+        builder.element(new PseudoText(PROP.getProperty("game.text.name")));
         ICanvas canvas = render.render(builder.build());
         String s = canvas.getText();
-        System.out.println(prop.getProperty("game.text.actual.version") + " " + prop.getProperty("game.settings.version"));
+        System.out.println(PROP.getProperty("game.text.actual.version") + " " + PROP.getProperty("game.settings.version"));
         System.out.println(s);
-        System.out.print(prop.getProperty("game.text.welcome") + "\n");
+        System.out.print(PROP.getProperty("game.text.welcome") + "\n");
     }
 
     private static void exitText() {
         IRender render = new Render();
         IContextBuilder builder = render.newBuilder();
         builder.width(120).height(20);
-        builder.element(new PseudoText(prop.getProperty("game.text.exit.text")));
+        builder.element(new PseudoText(PROP.getProperty("game.text.exit.text")));
         ICanvas canvas = render.render(builder.build());
         String s = canvas.getText();
         System.out.println(s);
     }
 
     private static void menuText() {
-        System.out.println(prop.getProperty("game.text.choose"));
-        System.out.println(prop.getProperty("game.text.type") + " " + startGame + " " + prop.getProperty("game.text.start"));
-        System.out.println(prop.getProperty("game.text.type") + " " + setName + " " + prop.getProperty("game.text.set.name"));
-        System.out.println(prop.getProperty("game.text.type") + " " + setShips + " " + prop.getProperty("game.text.set.ship"));
-        System.out.println(prop.getProperty("game.text.type") + " " + exit + " " + prop.getProperty("game.text.exit"));
+        System.out.println(PROP.getProperty("game.text.choose"));
+        System.out.println(PROP.getProperty("game.text.type") + " " + startGame + " " + PROP.getProperty("game.text.start"));
+        System.out.println(PROP.getProperty("game.text.type") + " " + setName + " " + PROP.getProperty("game.text.set.name"));
+        System.out.println(PROP.getProperty("game.text.type") + " " + setShips + " " + PROP.getProperty("game.text.set.ship"));
+        System.out.println(PROP.getProperty("game.text.type") + " " + exit + " " + PROP.getProperty("game.text.exit"));
 
     }
 
@@ -94,10 +94,10 @@ public class GameController {
             e.printStackTrace();
             System.exit(1);
         }
-        setName = prop.getProperty("game.control.set.name");
-        startGame = prop.getProperty("game.control.start");
-        setShips = prop.getProperty("game.control.set.ship");
-        exit = prop.getProperty("game.control.exit");
+        setName = PROP.getProperty("game.control.set.name");
+        startGame = PROP.getProperty("game.control.start");
+        setShips = PROP.getProperty("game.control.set.ship");
+        exit = PROP.getProperty("game.control.exit");
         player = createPlayer();
         welcomeText();
         LOGGER.info("initialization");
@@ -112,7 +112,7 @@ public class GameController {
         String command;
         boolean run = true;
         do {
-            command = uir.readInput().toUpperCase();
+            command = UIR.readInput().toUpperCase();
             if (command.equals(startGame)) {
                 LOGGER.info("choose start");
                 startGame();
@@ -129,7 +129,7 @@ public class GameController {
                 LOGGER.info("choose exit");
                 exit();
             } else {
-                System.out.println(prop.getProperty("game.text.notvalidcommand"));
+                System.out.println(PROP.getProperty("game.text.notvalidcommand"));
                 LOGGER.warn("invalid command!");
             }
         } while (run);
@@ -137,10 +137,10 @@ public class GameController {
 
     private static void startGame() {
         if (player.getName() == null) {
-            System.out.println(prop.getProperty("game.text.name.notset"));
+            System.out.println(PROP.getProperty("game.text.name.notset"));
             chooseMenu();
         } else if (!isShipsSet) {
-            System.out.println(prop.getProperty("game.text.ship.notset"));
+            System.out.println(PROP.getProperty("game.text.ship.notset"));
             chooseMenu();
         } else {
             new CommandLineDrawImpl().drawBoard(player.getBoard());
@@ -157,33 +157,33 @@ public class GameController {
 
     private static void setShip() {
         new CommandLineDrawImpl().drawBoard(player.getBoard());
-        System.out.println(prop.getProperty("game.text.set.ship.info"));
+        System.out.println(PROP.getProperty("game.text.set.ship.info"));
         int i = 0;
         do {
             re:
             {
-                String line = uir.readInput();
+                String line = UIR.readInput();
                 try {
-                    positionValidator.validate(coordinateConverter.sizeCalculator(line), line,
-                            Integer.parseInt(prop.getProperty("board.setting.numberofships")));
+                    POSITION_VALIDATOR.validate(COORDINATE_CONVERTER.sizeCalculator(line), line,
+                            Integer.parseInt(PROP.getProperty("board.setting.numberofships")));
                 } catch (PositionNotValidForSizeException | CoordinateFormatException | NotValidPositionException e) {
                     LOGGER.warn("coordinates fault");
-                    System.out.println(prop.getProperty("game.text.set.ship.warn"));
-                    System.out.println(prop.getProperty("game.text.set.ship.info"));
+                    System.out.println(PROP.getProperty("game.text.set.ship.warn"));
+                    System.out.println(PROP.getProperty("game.text.set.ship.info"));
                     break re;
                 }
                 for (Ship ship : player.getShips()) {
-                    if (ship.getSize() == coordinateConverter.sizeCalculator(line) && ship.getPosX() == 0 && ship.getPosY() == 0) {
-                        ship.setPosX(Integer.parseInt(positionValidator.convertPosition(line.split(":")[0])));
-                        ship.setPosY(Integer.parseInt(positionValidator.convertPosition(line.split(":")[1])));
-                        player.getBoard().setMatrixForBoard(boardModifier.modifyBoard(player.getBoard(), ship));
+                    if (ship.getSize() == COORDINATE_CONVERTER.sizeCalculator(line) && ship.getPosX() == 0 && ship.getPosY() == 0) {
+                        ship.setPosX(Integer.parseInt(POSITION_VALIDATOR.convertPosition(line.split(":")[0])));
+                        ship.setPosY(Integer.parseInt(POSITION_VALIDATOR.convertPosition(line.split(":")[1])));
+                        player.getBoard().setMatrixForBoard(BOARD_MODIFIER.modifyBoard(player.getBoard(), ship));
                         new CommandLineDrawImpl().drawBoard(player.getBoard());
-                        System.out.println(prop.getProperty("game.text.ship.add"));
+                        System.out.println(PROP.getProperty("game.text.ship.add"));
                         i++;
                     }
                 }
                 if (line.length() > 5 || !line.contains(":")) {
-                    System.out.println(prop.getProperty("game.text.set.ship.info"));
+                    System.out.println(PROP.getProperty("game.text.set.ship.info"));
                 }
                 break re;
             }
@@ -200,21 +200,21 @@ public class GameController {
 
 
     private static Player createPlayer() {
-        return new Player(new Board(Integer.parseInt(prop.getProperty("board.setting.board.size"))),
-                Integer.parseInt(prop.getProperty("board.setting.numberofships")));
+        return new Player(new Board(Integer.parseInt(PROP.getProperty("board.setting.board.size"))),
+                Integer.parseInt(PROP.getProperty("board.setting.numberofships")));
     }
 
     private static String getPlayerName() {
         String readName;
         do {
-            System.out.println(prop.getProperty("game.text.name.get"));
-            readName = uir.readInput();
+            System.out.println(PROP.getProperty("game.text.name.get"));
+            readName = UIR.readInput();
             if (readName.length() < 3) {
-                System.out.println(prop.getProperty("game.text.name.length"));
+                System.out.println(PROP.getProperty("game.text.name.length"));
                 LOGGER.warn("name length not enough");
             }
         } while (readName.length() < 3);
-        System.out.println(prop.getProperty("game.text.name.welcome") + " " + readName + "!\n");
+        System.out.println(PROP.getProperty("game.text.name.welcome") + " " + readName + "!\n");
         LOGGER.info("name set successfully actual name:" + readName);
         return readName;
     }

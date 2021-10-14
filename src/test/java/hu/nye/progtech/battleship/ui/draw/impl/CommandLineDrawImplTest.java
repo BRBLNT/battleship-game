@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import hu.nye.progtech.battleship.model.Board;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,7 +12,7 @@ import java.util.List;
 /**
  * Unit tests for {@link CommandLineDrawImpl}.
  */
-public class CommandLineDrawImplImplTest {
+public class CommandLineDrawImplTest {
 
     final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
 
