@@ -1,6 +1,7 @@
 package hu.nye.progtech.battleship.model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Player implementation.
@@ -62,4 +63,21 @@ public class Player {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Player player = (Player) o;
+        return numberOfShips == player.numberOfShips && Objects.equals(board, player.board) &&
+                Objects.equals(name, player.name) && Objects.equals(ships, player.ships);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(board, numberOfShips, name, ships);
+    }
 }

@@ -1,13 +1,11 @@
 package hu.nye.progtech.battleship.service.validate.impl;
 
-
 import hu.nye.progtech.battleship.service.exception.CoordinateFormatException;
 import hu.nye.progtech.battleship.service.exception.NotValidPositionException;
 import hu.nye.progtech.battleship.service.exception.PositionNotValidForSizeException;
 import hu.nye.progtech.battleship.service.validate.PositionValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 /**
  * Position Validator Implementation.

@@ -28,21 +28,16 @@ public class GameControllerTest {
     private static final String CONFIGDE = "configDE.properties";
 
     private static GameController underTest;
-    @Mock
+
     private static UserInputReader uir;
 
     private static final Properties prop = new Properties();
-
-    private static final PositionValidatorImpl positionValidator = new PositionValidatorImpl();
-    private static final CoordinateConverter coordinateConverter = new CoordinateConverter();
-    private static final BoardModifier boardModifier = new BoardModifier();
 
     private final static String NAME = "Test User";
     private final static String SET_NAME = "SET_NAME";
     private final static String START_GAME = "START_GAME";
     private final static String SET_SHIP = "SET_SHIP";
     private final static String INVALID_COMMAND = "NOT_DEFINED_COMMAND";
-    private static boolean isShipsSet = false;
 
     @Test
     public void testReadProperties() throws IOException {

@@ -3,7 +3,6 @@ package hu.nye.progtech.battleship.service.game;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.Scanner;
 
 import com.indvd00m.ascii.render.Render;
 import com.indvd00m.ascii.render.api.ICanvas;
@@ -85,7 +84,7 @@ public class GameController {
     }
 
     /**
-     * Init properties file and menu commands.
+     * Init properties file and set menu commands.
      */
     public static void init(String config, UserInputReader uirp) {
         try {

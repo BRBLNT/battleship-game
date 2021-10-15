@@ -16,7 +16,7 @@ public class UserInputReaderTest {
     private UserInputReader uir;
 
     @Test
-    public void testUserInputReaderScannerInput(){
+    public void testUserInputReaderScannerInputShouldReturnSameNameThatGetOnInput(){
         //given
         InputStream sysInBackup = System.in; // backup System.in to restore it later
         ByteArrayInputStream in = new ByteArrayInputStream(NAME.getBytes());

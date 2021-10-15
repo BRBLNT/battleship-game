@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Board visual modifier.
- * If we add ships to board or change the cell condition update visual implementation.
+ * If we add ships to board or change the cells, update visual implementation.
  */
 public final class BoardModifier {
 

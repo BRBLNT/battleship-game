@@ -2,12 +2,12 @@ package hu.nye.progtech.battleship.ui.draw.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import hu.nye.progtech.battleship.model.Board;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+
+import hu.nye.progtech.battleship.model.Board;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit tests for {@link CommandLineDrawImpl}.
@@ -43,7 +43,7 @@ public class CommandLineDrawImplTest {
             "  1 2 3 4\nA|0|0|0|0|\n - - - -\nB|0|0|0|0|\n - - - -\nC|0|0|0|0|\n - - - -\nD|0|0|0|0|\n - - - -\n";
 
     @Test
-    public void testDrawBoard(){
+    public void testDrawBoardShouldReturnCorrectStdoutVisual(){
         //given
         board = new Board(BOARD_SIZE);
         underTest = new CommandLineDrawImpl();

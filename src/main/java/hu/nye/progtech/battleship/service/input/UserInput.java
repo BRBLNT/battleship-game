@@ -2,7 +2,7 @@ package hu.nye.progtech.battleship.service.input;
 
 /**
  * User input interface.
- * We can change input only need to implement this interface.
+ * The user can give commands or text on different ways.
  */
 public interface UserInput {
     String readInput();

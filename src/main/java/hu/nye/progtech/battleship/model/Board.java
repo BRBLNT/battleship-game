@@ -61,5 +61,34 @@ public final class Board {
                 '}';
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Board board = (Board) o;
+        return cellsTitleHorizontal == board.cellsTitleHorizontal && cellsTitleVertical == board.cellsTitleVertical
+                && Arrays.deepEquals(matrixForBoard, board.matrixForBoard);
+    }
+
+    private char[][] deepCopy(char[][] array) {
+        char[][] result = null;
+
+        if (array != null) {
+            result = new char[array.length][];
+            for (int i = 0; i < array.length; i++) {
+                result[i] = Arrays.copyOf(array[i], array[i].length);
+            }
+        }
+
+        return result;
+    }
 }

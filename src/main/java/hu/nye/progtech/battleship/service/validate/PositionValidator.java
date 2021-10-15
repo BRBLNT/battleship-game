@@ -5,7 +5,7 @@ import hu.nye.progtech.battleship.service.exception.NotValidPositionException;
 import hu.nye.progtech.battleship.service.exception.PositionNotValidForSizeException;
 
 /**
- * Position validator interface.
+ * Position validator interface. Define methods to check coordinate value is valid.
  */
 public interface PositionValidator {
 

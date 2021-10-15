@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Unit tests for {@link PositionValidatorImpl}.
  */
-
 public class PositionValidatorImplTest {
+
 
     private static final String POS = "A1:A2";
     private static final String POS2 = "B1:C1";
@@ -41,6 +41,10 @@ public class PositionValidatorImplTest {
         underTest.validFormat(POS2);
         // then no exception is thrown
     }
+
+    /*
+    Test more invalid position.
+     */
 
     @Test
     public void testValidateShouldThrowExceptionWhenPosInCorrectForm() {

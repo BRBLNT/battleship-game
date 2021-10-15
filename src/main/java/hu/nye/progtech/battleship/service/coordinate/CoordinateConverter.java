@@ -3,7 +3,7 @@ package hu.nye.progtech.battleship.service.coordinate;
 import hu.nye.progtech.battleship.service.validate.impl.PositionValidatorImpl;
 
 /**
- * Convert coordinates.
+ * Convert coordinates from full form to number or calculate distance between positions.
  * example: A1 to 11 or C1 to 31.
  */
 public final class CoordinateConverter {

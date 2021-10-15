@@ -50,7 +50,7 @@ public class BoardModifierTest {
     };
 
     @Test
-    public void testBoardModifierShouldReturnEqualsBoardHorizontal() {
+    public void testBoardModifierShouldReturnEqualsBoardIfCoordinatesIsHorizontal() {
         // given in setup
         underTest = new BoardModifier();
         ship = new Ship(SIZE);
@@ -68,7 +68,7 @@ public class BoardModifierTest {
     }
 
     @Test
-    public void testBoardModifierShouldReturnEqualsBoardVertical() {
+    public void testBoardModifierShouldReturnEqualsBoardIfCoordinatesIsVertical() {
         // given in setup
         underTest = new BoardModifier();
         ship = new Ship(SIZE);
