@@ -12,14 +12,16 @@ import org.slf4j.LoggerFactory;
 public class UserInputReader implements UserInput {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserInputReader.class);
 
-    private final Scanner reader;
+    private static Scanner reader;
 
     public UserInputReader(Scanner reader) {
         this.reader = reader;
     }
 
-    @Override
-    public String readInput() {
+    /**
+     * Read input from console.
+     */
+    public static String readInput() {
         String input = null;
         try {
             input = reader.nextLine();

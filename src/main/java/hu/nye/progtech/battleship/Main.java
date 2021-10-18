@@ -17,7 +17,6 @@ public class Main {
     public static void main(String[] args) {
         GameController gl = new GameController();
         GameController.init("config.properties", new UserInputReader(new Scanner(System.in)));
-        GameController.chooseMenu();
     }
 
 

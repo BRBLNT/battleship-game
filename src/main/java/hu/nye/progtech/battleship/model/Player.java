@@ -1,7 +1,10 @@
 package hu.nye.progtech.battleship.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
+
+import hu.nye.progtech.battleship.service.properties.ConfigReader;
 
 /**
  * Player implementation.
@@ -11,12 +14,20 @@ public class Player {
     private final int numberOfShips;
     private String name;
     private ArrayList<Ship> ships;
+    private boolean[][] hits;
 
     public Player(Board board, int numberOfShips) {
         this.board = board;
         this.numberOfShips = numberOfShips;
         ships = new ArrayList<>();
         shipsArraySize(numberOfShips);
+        int hitSize = Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.board.size"));
+        hits = new boolean[hitSize][hitSize];
+        for (int i = 0; i < board.getBoardSize(); i++) {
+            for (int j = 0; j < board.getBoardSize(); j++) {
+                hits[i][j] = false;
+            }
+        }
     }
 
     public String getName() {
@@ -53,14 +64,12 @@ public class Player {
         this.ships = ships;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "Name='" + name + '\'' +
-                ", board=" + board +
-                ", numberOfShips=" + numberOfShips +
-                ", ships=" + ships +
-                '}';
+    public boolean[][] getHits() {
+        return hits;
+    }
+
+    public void setHits(boolean[][] hits) {
+        this.hits = hits;
     }
 
     @Override
@@ -73,11 +82,25 @@ public class Player {
         }
         Player player = (Player) o;
         return numberOfShips == player.numberOfShips && Objects.equals(board, player.board) &&
-                Objects.equals(name, player.name) && Objects.equals(ships, player.ships);
+                Objects.equals(name, player.name) && Objects.equals(ships, player.ships) &&
+                Arrays.equals(hits, player.hits);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(board, numberOfShips, name, ships);
+        int result = Objects.hash(board, numberOfShips, name, ships);
+        result = 31 * result + Arrays.hashCode(hits);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "board=" + board +
+                ", numberOfShips=" + numberOfShips +
+                ", name='" + name + '\'' +
+                ", ships=" + ships +
+                ", hits=" + Arrays.toString(hits) +
+                '}';
     }
 }

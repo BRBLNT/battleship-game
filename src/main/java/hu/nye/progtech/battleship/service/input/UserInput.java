@@ -5,5 +5,9 @@ package hu.nye.progtech.battleship.service.input;
  * The user can give commands or text on different ways.
  */
 public interface UserInput {
-    String readInput();
+
+    static String readInput() {
+        return null;
+    }
+
 }
