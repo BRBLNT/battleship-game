@@ -9,6 +9,7 @@ import hu.nye.progtech.battleship.service.exception.PositionNotValidForSizeExcep
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.modify.BoardModifier;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
+import hu.nye.progtech.battleship.service.validate.EmptyPositionChecker;
 import hu.nye.progtech.battleship.service.validate.impl.PositionValidatorImpl;
 import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDrawImpl;
@@ -26,7 +27,7 @@ public class SetShip {
     private static final Logger LOGGER = LoggerFactory.getLogger(SetShip.class);
 
     /**
-     * Set ship mehod player set ships on the board.
+     * Set ship method player set ships on the board.
      */
     public static void setShip(Player player) {
         new CommandLineDrawImpl().drawBoard(player.getBoard());
@@ -53,6 +54,14 @@ public class SetShip {
                     PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
                     PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
                     break re;
+                }
+                try {
+                    EmptyPositionChecker.positionIsEmpty(player.getBoard(), line);
+                } catch (CoordinateFormatException | NotValidPositionException e) {
+                    LOGGER.warn("coordinates fault");
+                    PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
+                    PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+                break re;
                 }
                 for (Ship ship : player.getShips()) {
                     int actualSize = 0;

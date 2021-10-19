@@ -29,4 +29,13 @@ public class PrintWrapper {
             System.out.println("");
         }
     }
+
+    /**
+     * Print more thing in line.
+     */
+    public static void printMore(int times, String string) {
+        for (int i = 0; i < times; i++) {
+            System.out.print(string);
+        }
+    }
 }
