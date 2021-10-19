@@ -1,5 +1,6 @@
 package hu.nye.progtech.battleship.service.coordinate;
 
+import hu.nye.progtech.battleship.service.exception.CoordinateFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +19,7 @@ public class CoordinateConverterTest {
     private CoordinateConverter underTest;
 
     @Test
-    public void testCoordinateConverterShouldReturnEqualsValue() {
+    public void testCoordinateConverterShouldReturnEqualsValue() throws CoordinateFormatException {
         // given
         underTest = new CoordinateConverter();
         // when
@@ -34,7 +35,12 @@ public class CoordinateConverterTest {
         // given
         underTest = new CoordinateConverter();
         // when
-        int resultOne = underTest.sizeCalculator(EMPTY_POS);
+        int resultOne = 0;
+        try {
+            resultOne = underTest.sizeCalculator(EMPTY_POS);
+        } catch (CoordinateFormatException e) {
+           resultOne = -1;
+        }
         // then no exception is thrown
         assertEquals(WRONG_POS, resultOne);
     }

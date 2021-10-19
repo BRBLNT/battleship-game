@@ -10,6 +10,7 @@ import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.modify.BoardModifier;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.service.validate.impl.PositionValidatorImpl;
+import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDrawImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,33 +30,58 @@ public class SetShip {
      */
     public static void setShip(Player player) {
         new CommandLineDrawImpl().drawBoard(player.getBoard());
-        System.out.println(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.ship.avaiablesizes") + " " +
+                ConfigReader.getPropertyFromConfig("board.setting.numberofships"));
         int i = 0;
         do {
             re:
             {
+                PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.ship.avaiablesizesnotset"));
+                for (Ship ship : player.getShips()) {
+                    if (ship.getPosY().equals("") && ship.getPosX().equals("")) {
+                        PrintWrapper.print(ship.getSize() + " ");
+                    }
+                }
+                PrintWrapper.printLine("");
                 String line = UserInputReader.readInput();
                 try {
                     POSITION_VALIDATOR.validate(COORDINATE_CONVERTER.sizeCalculator(line), line,
                             Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.numberofships")));
                 } catch (PositionNotValidForSizeException | CoordinateFormatException | NotValidPositionException e) {
                     LOGGER.warn("coordinates fault");
-                    System.out.println(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
-                    System.out.println(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+                    PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
+                    PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
                     break re;
                 }
                 for (Ship ship : player.getShips()) {
-                    if (ship.getSize() == COORDINATE_CONVERTER.sizeCalculator(line) && ship.getPosX() == 0 && ship.getPosY() == 0) {
-                        ship.setPosX(Integer.parseInt(POSITION_VALIDATOR.convertPosition(line.split(":")[0])));
-                        ship.setPosY(Integer.parseInt(POSITION_VALIDATOR.convertPosition(line.split(":")[1])));
+                    int actualSize = 0;
+                    try {
+                        actualSize = COORDINATE_CONVERTER.sizeCalculator(line);
+                    } catch (CoordinateFormatException e) {
+                        LOGGER.warn("coordinates fault");
+                        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
+                        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+                        break re;
+                    }
+                    if (ship.getSize() == actualSize && ship.getPosX().equals("") && ship.getPosY().equals("")) {
+                        ship.setPosX(
+                                POSITION_VALIDATOR.convertPosition(line.split(":")[0]));
+                        ship.setPosY(
+                                POSITION_VALIDATOR.convertPosition(line.split(":")[1]));
                         player.getBoard().setMatrixForBoard(BOARD_MODIFIER.modifyBoard(player.getBoard(), ship));
                         new CommandLineDrawImpl().drawBoard(player.getBoard());
-                        System.out.println(ConfigReader.getPropertyFromConfig("game.text.ship.add"));
+                        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.ship.add"));
                         i++;
+                    } else if (ship.getSize() == actualSize && ship.getPosX().equals("") && ship.getPosY().equals("")) {
+                        LOGGER.warn("ship not free");
+                        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
+                        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+                        break re;
                     }
                 }
                 if (line.length() > 5 || !line.contains(":")) {
-                    System.out.println(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
+                    PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));
                 }
                 break re;
             }

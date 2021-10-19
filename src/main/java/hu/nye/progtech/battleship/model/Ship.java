@@ -8,26 +8,28 @@ import java.util.Objects;
  */
 public final class Ship {
     private final int size;
-    private int posX;
-    private int posY;
+    private String posX;
+    private String posY;
 
     public Ship(int size) {
         this.size = size;
+        posX = "";
+        posY = "";
     }
 
-    public int getPosX() {
+    public String getPosX() {
         return posX;
     }
 
-    public void setPosX(int posX) {
+    public void setPosX(String posX) {
         this.posX = posX;
     }
 
-    public int getPosY() {
+    public String getPosY() {
         return posY;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(String posY) {
         this.posY = posY;
     }
 

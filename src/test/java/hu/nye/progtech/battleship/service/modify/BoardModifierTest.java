@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
  */
 public class BoardModifierTest {
 
-    private static final int POS1 = 11;
-    private static final int POS2 = 12;
+    private static final String POS1 = "1:1";
+    private static final String POS2 = "1:2";
 
-    private static final int POS21 = 11;
-    private static final int POS22 = 21;
+    private static final String POS21 = "1:1";
+    private static final String POS22 = "2:1";
 
     private static final int SIZE = 2;
     private static final int BOARD_SIZE = 5;

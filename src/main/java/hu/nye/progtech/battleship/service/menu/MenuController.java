@@ -63,6 +63,7 @@ public final class MenuController {
      * Choose menu in the game we can set name, set ships , start game or exit the game.
      */
     public static void chooseMenu(Player player) {
+        PrintWrapper.printSpace(3);
         menuText();
         String command;
         boolean run = true;
@@ -84,7 +85,7 @@ public final class MenuController {
                 LOGGER.info("choose exit");
                 exit();
             } else {
-                System.out.println(ConfigReader.getPropertyFromConfig("game.text.notvalidcommand"));
+                PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.notvalidcommand"));
                 LOGGER.warn("invalid command!");
             }
         } while (run);

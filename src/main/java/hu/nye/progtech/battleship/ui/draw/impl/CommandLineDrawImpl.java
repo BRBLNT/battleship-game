@@ -10,27 +10,26 @@ import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 public class CommandLineDrawImpl implements Draw {
     private static final String HORIZONTAL_SEPARATOR = " -";
     private static final String VERTICAL_SEPARATOR = "|";
-    private PrintWrapper printWrapper;
+
 
     @Override
     public void drawBoard(Board b) {
-        printWrapper = new PrintWrapper();
-        printWrapper.print(" ");
+        PrintWrapper.print(" ");
         for (int i = 0; i < b.getBoardSize(); i++) {
-            printWrapper.print(" " + b.getCellsTitleHorizontal().get(i));
+            PrintWrapper.print(" " + b.getCellsTitleHorizontal().get(i));
         }
-        printWrapper.print("\n");
+        PrintWrapper.print("\n");
         for (int i = 0; i < b.getBoardSize(); i++) {
-            printWrapper.print(b.getCellsTitleVertical().get(i) + "");
-            printWrapper.print(VERTICAL_SEPARATOR);
+            PrintWrapper.print(b.getCellsTitleVertical().get(i) + "");
+            PrintWrapper.print(VERTICAL_SEPARATOR);
             for (int j = 0; j < b.getBoardSize(); j++) {
-                printWrapper.print(b.getMatrixForBoard()[i][j] + VERTICAL_SEPARATOR + "");
+                PrintWrapper.print(b.getMatrixForBoard()[i][j] + VERTICAL_SEPARATOR + "");
             }
-            printWrapper.print("\n");
+            PrintWrapper.print("\n");
             for (int j = 0; j < b.getBoardSize(); j++) {
-                printWrapper.print(HORIZONTAL_SEPARATOR);
+                PrintWrapper.print(HORIZONTAL_SEPARATOR);
             }
-            printWrapper.print("\n");
+            PrintWrapper.print("\n");
         }
     }
 

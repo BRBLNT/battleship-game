@@ -17,10 +17,10 @@ public final class BoardModifier {
      * If we add ships to board change 0 to 1.
      */
     public char[][] modifyBoard(Board b, Ship ship) {
-        int posX1 = ship.getPosX() / 10;
-        int posY1 = ship.getPosY() / 10;
-        int posX2 = ((ship.getPosX() * 10) - (posX1 * 100)) / 10;
-        int posY2 = ((ship.getPosY() * 10) - (posY1 * 100)) / 10;
+        int posX1 = Integer.parseInt(ship.getPosX().split(":")[0]);
+        int posY1 = Integer.parseInt(ship.getPosY().split(":")[0]);
+        int posX2 = Integer.parseInt(ship.getPosX().split(":")[1]);
+        int posY2 = Integer.parseInt(ship.getPosY().split(":")[1]);
         LOGGER.info(posX1 + " " + posX2 + " " + posY1 + " " + posY2);
         boolean start = false;
         int counter = 1;

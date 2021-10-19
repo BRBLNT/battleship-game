@@ -18,4 +18,15 @@ public class PrintWrapper {
     public static void printLine(String string) {
         System.out.println(string);
     }
+
+    /**
+     * Print more empty line.
+     *
+     * @param lines the numbers of empty lines
+     */
+    public static void printSpace(int lines) {
+        for (int i = 0; i < lines; i++) {
+            System.out.println("");
+        }
+    }
 }
