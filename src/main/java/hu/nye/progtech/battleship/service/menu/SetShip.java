@@ -73,7 +73,7 @@ public class SetShip {
                         new CommandLineDrawImpl().drawBoard(player.getBoard());
                         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.ship.add"));
                         i++;
-                    } else if (ship.getSize() == actualSize && ship.getPosX().equals("") && ship.getPosY().equals("")) {
+                    } else if (ship.getSize() == actualSize && !ship.getPosX().equals("") && !ship.getPosY().equals("")) {
                         LOGGER.warn("ship not free");
                         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.warn"));
                         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.set.ship.info"));

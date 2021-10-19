@@ -13,6 +13,11 @@ public final class BoardModifier {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardModifier.class);
 
+    private static final char HIT = '+';
+    private static final char MISS = 'X';
+    private static final char FULL = '/';
+
+
     /**
      * If we add ships to board change 0 to 1.
      */

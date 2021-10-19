@@ -9,7 +9,7 @@ import hu.nye.progtech.battleship.service.properties.ConfigReader;
 /**
  * Player implementation.
  */
-public class Player {
+public class Player extends Statistics{
     private Board board;
     private final int numberOfShips;
     private String name;
@@ -17,6 +17,7 @@ public class Player {
     private boolean[][] hits;
 
     public Player(Board board, int numberOfShips) {
+        super();
         this.board = board;
         this.numberOfShips = numberOfShips;
         ships = new ArrayList<>();
