@@ -7,10 +7,16 @@ import hu.nye.progtech.battleship.service.exception.CoordinateFormatException;
 import hu.nye.progtech.battleship.service.exception.NotValidPositionException;
 import hu.nye.progtech.battleship.service.validate.impl.PositionValidatorImpl;
 
+/**
+ * Validate position is empty.
+ */
 public final class EmptyPositionChecker {
 
     private static final PositionValidatorImpl POSITION_VALIDATOR = new PositionValidatorImpl();
 
+    /**
+     * Check empty spaces for ship if all coordinate is empty ship may place there.
+     */
     public static void positionIsEmpty(Board board, String pos)
             throws CoordinateFormatException, NotValidPositionException {
         boolean isEmpty = true;
@@ -32,7 +38,7 @@ public final class EmptyPositionChecker {
                         start = true;
                     }
                     if (start && counter <= ship.getSize() && posX1 - 1 == i && posX2 - 1 <= j) {
-                        if(board.getMatrixForBoard()[i][j] == '1') {
+                        if (board.getMatrixForBoard()[i][j] == '1') {
                             isEmpty = false;
                         }
                         counter++;
@@ -42,7 +48,7 @@ public final class EmptyPositionChecker {
                         start = true;
                     }
                     if (start && counter <= ship.getSize() && posX2 - 1 == j && posX1 - 1 <= i) {
-                        if(board.getMatrixForBoard()[i][j] == '1') {
+                        if (board.getMatrixForBoard()[i][j] == '1') {
                             isEmpty = false;
                         }
                         counter++;
@@ -50,7 +56,7 @@ public final class EmptyPositionChecker {
                 }
             }
         }
-        if(!isEmpty) {
+        if (!isEmpty) {
             throw new NotValidPositionException("Not empty positon");
         }
     }

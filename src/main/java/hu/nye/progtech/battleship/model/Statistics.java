@@ -2,6 +2,9 @@ package hu.nye.progtech.battleship.model;
 
 import java.util.Objects;
 
+/**
+ * Count statistic for players game.
+ */
 public abstract class Statistics {
     private int numberOfHits;
     private int numberOfSteps;
@@ -56,7 +59,8 @@ public abstract class Statistics {
             return false;
         }
         Statistics that = (Statistics) o;
-        return numberOfHits == that.numberOfHits && numberOfSteps == that.numberOfSteps && numberOfGames == that.numberOfGames && numberOfWins == that.numberOfWins;
+        return numberOfHits == that.numberOfHits && numberOfSteps == that.numberOfSteps &&
+                numberOfGames == that.numberOfGames && numberOfWins == that.numberOfWins;
     }
 
     @Override

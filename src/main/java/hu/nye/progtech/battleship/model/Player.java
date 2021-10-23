@@ -9,7 +9,7 @@ import hu.nye.progtech.battleship.service.properties.ConfigReader;
 /**
  * Player implementation.
  */
-public class Player extends Statistics{
+public class Player extends Statistics {
     private Board board;
     private final int numberOfShips;
     private String name;

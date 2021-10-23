@@ -1,7 +1,7 @@
 package hu.nye.progtech.battleship.service.ai;
 
 /**
- * Generate hit for the bot.
+ * Choose moves for the bot.
  */
-public class GenerateSteps {
+public class Moves {
 }
