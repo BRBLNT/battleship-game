@@ -29,8 +29,6 @@ public class HighScoreTable {
         PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
         PrintWrapper.print("Wins");
         PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
-        PrintWrapper.print("Rate");
-        PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
         PrintWrapper.printMore(20, HORIZONTAL_SEPARATOR);
         for (Player player : players) {
             PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
@@ -38,8 +36,6 @@ public class HighScoreTable {
             PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
             PrintWrapper.print("    ");
             PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
-            PrintWrapper.print("    ");
-            PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
             PrintWrapper.printMore(15, HORIZONTAL_SEPARATOR);
         }
     }
