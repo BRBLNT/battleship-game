@@ -8,14 +8,14 @@ import hu.nye.progtech.battleship.service.input.NameReader;
  * Generate opponent AI.
  */
 public class GenerateOpponent {
-    private static OpponentAI bot;
 
     /**
      * Generate opponent AI.
      */
-    public static void generate() {
-        bot = new OpponentAI();
+    public static OpponentAI generate() {
+        OpponentAI bot = new OpponentAI();
         bot.setName(NameReader.readRandomNameForTheBot());
         bot.setBoard(MapReader.getBoard());
+        return bot;
     }
 }
