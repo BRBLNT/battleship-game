@@ -15,7 +15,7 @@ public class Player extends Statistics {
     private String name;
     private ArrayList<Ship> ships;
     private boolean[][] hits;
-    private char[][] cleanBoard;
+    private Board cleanBoard;
 
     public Player(Board board, int numberOfShips) {
         super();
@@ -24,14 +24,21 @@ public class Player extends Statistics {
         ships = new ArrayList<>();
         shipsArraySize(numberOfShips);
         int hitSize = Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.board.size"));
-        cleanBoard = new char[hitSize][hitSize];
+        cleanBoard = new Board(hitSize);
         hits = new boolean[hitSize][hitSize];
         for (int i = 0; i < board.getBoardSize(); i++) {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 hits[i][j] = false;
-                cleanBoard[i][j] = '0';
             }
         }
+    }
+
+    public Board getCleanBoard() {
+        return cleanBoard;
+    }
+
+    public void setCleanBoard(Board cleanBoard) {
+        this.cleanBoard = cleanBoard;
     }
 
     public String getName() {
