@@ -10,7 +10,7 @@ import hu.nye.progtech.battleship.model.Player;
 public class GenerateMoves {
 
     private boolean randomTwoOption() {
-        int num = (int)((Math.random()*100)+1);
+        int num = (int) ((Math.random() * 100) + 1);
         if (num % 2 == 0) {
             return true;
         }
@@ -19,11 +19,11 @@ public class GenerateMoves {
     }
 
     private static int generateX(OpponentAI bot) {
-        return (int) (Math.random()*bot.getBoard().getBoardSize())+0;
+        return (int) (Math.random() * bot.getBoard().getBoardSize()) + 0;
     }
 
     private static int generateY(OpponentAI bot) {
-        return (int) (Math.random()*bot.getBoard().getBoardSize())+0;
+        return (int) (Math.random() * bot.getBoard().getBoardSize()) + 0;
     }
 
     private boolean notHitBefore(OpponentAI bot, int x, int y) {
@@ -62,15 +62,15 @@ public class GenerateMoves {
             do {
                 if (randomTwoOption()) {
                     if (randomTwoOption()) {
-                        x = x-1;
+                        x = x - 1;
                     } else {
-                        x = x+1;
+                        x = x + 1;
                     }
                 } else {
                     if (randomTwoOption()) {
-                        y = y-1;
+                        y = y - 1;
                     } else {
-                        y = y+1;
+                        y = y + 1;
                     }
                 }
                 if (hit(p, x, y)) {

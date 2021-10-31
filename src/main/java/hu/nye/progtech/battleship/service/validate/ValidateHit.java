@@ -13,7 +13,7 @@ public class ValidateHit {
      * Check position in board.
      */
     public static boolean positionOnBoard(String pos, int maxSize) {
-        String slices[] = pos.split(":");
+        String[] slices = pos.split(":");
         if (slices.length < 1) {
             return false;
         }

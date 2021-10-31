@@ -74,7 +74,7 @@ public class GameProcess {
     }
 
 
-    private boolean win(){
+    private boolean win() {
         return false;
     }
 }
