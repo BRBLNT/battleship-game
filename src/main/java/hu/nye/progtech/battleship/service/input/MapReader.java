@@ -1,8 +1,6 @@
 package hu.nye.progtech.battleship.service.input;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +15,13 @@ public class MapReader {
 
     private static Board board;
     private static final int DEFAULT_SIZE = 10;
-    private static final String NAME_OF_MAP_FILE = "boards.txt";
+    private static final String NAME_OF_MAP_FILE = "ai/boards.txt";
     private static List<String> lines = new ArrayList();
     private static final Logger LOGGER = LoggerFactory.getLogger(MapReader.class);
 
 
-    /**
-     * Read map if the map is 10x10 and have 5 ships.
-     */
-    public static void readMapDefaultSize() {
+
+    private static void readMapDefaultSize() {
         board = new Board(DEFAULT_SIZE);
         upload(NAME_OF_MAP_FILE);
         int random = (int) (Math.random() * lines.size()) + 0;
@@ -34,21 +30,15 @@ public class MapReader {
 
     private static void upload(String file) {
         LOGGER.info("read board for bot");
-        BufferedReader reader = null;
+        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(NAME_OF_MAP_FILE);
         try {
-            reader = new BufferedReader(new FileReader(file));
-            String line = null;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException ex) {
             LOGGER.error("no boards file");
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException ex) {
-                LOGGER.error("reader not closed");
-            }
         }
     }
 
@@ -63,6 +53,9 @@ public class MapReader {
         return matrix;
     }
 
+    /**
+     * Read map if the map is 10x10 and have 5 ships.
+     */
     public static Board getBoard() {
         readMapDefaultSize();
         return board;

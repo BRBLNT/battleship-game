@@ -1,8 +1,6 @@
 package hu.nye.progtech.battleship.service.input;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -13,7 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 public class NameReader {
     private static final ArrayList<String> names = new ArrayList<>();
-    private static final String NAME_OF_NAMES_FILE = "names.txt";
+    private static final String NAME_OF_NAMES_FILE = "ai/names.txt";
     private static final Logger LOGGER = LoggerFactory.getLogger(NameReader.class);
     private static final String DEFAULT_NAME = "Alejandro Sosa";
 
@@ -30,22 +28,16 @@ public class NameReader {
     }
 
     private static void upload(String file) {
-        LOGGER.info("read name for bot");
-        BufferedReader reader = null;
+
+        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(NAME_OF_NAMES_FILE);
         try {
-            reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 names.add(line);
             }
         } catch (IOException ex) {
             LOGGER.error("no names file use default name");
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException ex) {
-                LOGGER.error("reader not closed");
-            }
         }
     }
 }

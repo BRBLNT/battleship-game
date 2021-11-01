@@ -4,6 +4,7 @@ import static hu.nye.progtech.battleship.service.menu.Exit.exit;
 
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
+import hu.nye.progtech.battleship.service.players.HighScoreTable;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public final class MenuController {
     private static String setName;
     private static String startGame;
     private static String setShips;
+    private static String hs;
     private static String exit;
     private static boolean isShipsSet = false;
 
@@ -46,6 +48,10 @@ public final class MenuController {
         MenuController.exit = exit;
     }
 
+    public static void setHs(String hs) {
+        MenuController.hs = hs;
+    }
+
     private static void menuText() {
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.choose"));
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
@@ -54,6 +60,8 @@ public final class MenuController {
                 setName + " " + ConfigReader.getPropertyFromConfig("game.text.set.name"));
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
                 setShips + " " + ConfigReader.getPropertyFromConfig("game.text.set.ship"));
+        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
+                hs + " " + ConfigReader.getPropertyFromConfig("game.text.geths"));
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
                 exit + " " + ConfigReader.getPropertyFromConfig("game.text.exit"));
 
@@ -80,6 +88,10 @@ public final class MenuController {
             } else if (command.equals(setShips)) {
                 LOGGER.info("choose set ships");
                 SetShip.setShip(player);
+                run = false;
+            } else if (command.equals(hs)) {
+                LOGGER.info("choose highscore");
+                Statistic.printStat(player);
                 run = false;
             } else if (command.equals(exit)) {
                 LOGGER.info("choose exit");

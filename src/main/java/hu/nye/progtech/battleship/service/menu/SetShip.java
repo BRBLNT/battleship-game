@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Player set ships on the board.
  */
-public class SetShip {
+public final class SetShip {
 
     private static final PositionValidatorImpl POSITION_VALIDATOR = new PositionValidatorImpl();
     private static final CoordinateConverter COORDINATE_CONVERTER = new CoordinateConverter();

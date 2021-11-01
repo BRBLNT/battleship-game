@@ -1,6 +1,8 @@
 package hu.nye.progtech.battleship.service.menu;
 
 import hu.nye.progtech.battleship.model.Player;
+import hu.nye.progtech.battleship.service.ai.GenerateOpponent;
+import hu.nye.progtech.battleship.service.game.GameProcess;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 
@@ -20,10 +22,9 @@ public final class StartGame {
             PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.ship.notset"));
             MenuController.chooseMenu(player);
         } else {
-            /*
-            Here is the game
-             */
+            //add player to DB
+            GameProcess.initParticipants(player, GenerateOpponent.generate());
+            GameProcess.game();
         }
-
     }
 }

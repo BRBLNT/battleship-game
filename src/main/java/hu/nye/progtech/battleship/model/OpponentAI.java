@@ -22,8 +22,8 @@ public class OpponentAI {
         shipsArraySize(numberOfShips);
         int hitSize = Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.board.size"));
         hits = new boolean[hitSize][hitSize];
-        for (int i = 0; i < board.getBoardSize(); i++) {
-            for (int j = 0; j < board.getBoardSize(); j++) {
+        for (int i = 0; i < hitSize; i++) {
+            for (int j = 0; j < hitSize; j++) {
                 hits[i][j] = false;
             }
         }
