@@ -39,10 +39,10 @@ public class HighScoreTable {
         for (Player player : players) {
             PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
             PrintWrapper.print(player.getName());
-            PrintWrapper.printMore( FIRST_SPACE - player.getName().length(), " ");
+            PrintWrapper.printMore(FIRST_SPACE - player.getName().length(), " ");
             PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
             PrintWrapper.print("" + player.getNumberOfWins());
-            PrintWrapper.printMore(SECOND_SPACE - player.getNumberOfWins()," ");
+            PrintWrapper.printMore(SECOND_SPACE - player.getNumberOfWins(), " ");
             PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
             PrintWrapper.printLine("");
             PrintWrapper.printMore(HORIZONTAL, HORIZONTAL_SEPARATOR);

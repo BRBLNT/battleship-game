@@ -25,7 +25,7 @@ public class ValidateHit {
             }
             size++;
         }
-        if (size > maxSize || Integer.parseInt(slices[1])-1 > maxSize) {
+        if (size > maxSize || Integer.parseInt(slices[1]) - 1 > maxSize) {
             return false;
         }
         return true;
@@ -47,7 +47,7 @@ public class ValidateHit {
             }
             size++;
         }
-        if (p.getHits()[size][Integer.parseInt(slices[1])-1]) {
+        if (p.getHits()[size][Integer.parseInt(slices[1]) - 1]) {
             return false;
         }
         return true;

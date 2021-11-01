@@ -30,6 +30,9 @@ public class GameProcess {
      */
     private static boolean lastStep = true;
 
+    /**
+     * Init participnats.
+     */
     public static void initParticipants(Player p, OpponentAI oai) {
         player = p;
         ai = oai;

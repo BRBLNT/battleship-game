@@ -4,7 +4,6 @@ import static hu.nye.progtech.battleship.service.menu.Exit.exit;
 
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
-import hu.nye.progtech.battleship.service.players.HighScoreTable;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 import org.slf4j.Logger;
