@@ -18,31 +18,34 @@ public class HighScoreTable {
     private static final String VERTICAL_THICK_SEPARATOR = "||";
     private static final int FIRST_SPACE = 17;
     private static final int SECOND_SPACE = 7;
-    private static final int HORIZONTAL = 24 + 3;
+    private static final int HORIZONTAL = 24 + 5;
 
     /**
      * Print high score table.
      */
     public static void printHighScoreTable(ArrayList<Player> players) {
+        if (players.isEmpty()) {
+            return;
+        }
         LOGGER.info("print high score table");
         PrintWrapper.printSpace(5);
         PrintWrapper.printMore(HORIZONTAL, HORIZONTAL_SEPARATOR);
         PrintWrapper.printLine("");
-        PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
-        PrintWrapper.print("  Name           ");
         PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
+        PrintWrapper.print("  Name           ");
+        PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
         PrintWrapper.print("  Wins ");
         PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
         PrintWrapper.printLine("");
         PrintWrapper.printMore(HORIZONTAL, HORIZONTAL_SEPARATOR);
         PrintWrapper.printLine("");
         for (Player player : players) {
-            PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
+            PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
             PrintWrapper.print(player.getName());
             PrintWrapper.printMore(FIRST_SPACE - player.getName().length(), " ");
-            PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
+            PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
             PrintWrapper.print("" + player.getNumberOfWins());
-            PrintWrapper.printMore(SECOND_SPACE - player.getNumberOfWins(), " ");
+            PrintWrapper.printMore(SECOND_SPACE - 1, " ");
             PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
             PrintWrapper.printLine("");
             PrintWrapper.printMore(HORIZONTAL, HORIZONTAL_SEPARATOR);

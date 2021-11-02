@@ -53,4 +53,6 @@ public class CommandLineDrawImplTest {
         //then
         assertEquals(EMPTY_BOARD_AS_STRING,myOut.toString());
     }
+
+
 }
