@@ -11,11 +11,11 @@ public abstract class Statistics {
     private int numberOfGames;
     private int numberOfWins;
 
-    public Statistics() {
-        this.numberOfHits = 0;
-        this.numberOfSteps = 0;
-        this.numberOfGames = 0;
-        this.numberOfWins = 0;
+    public Statistics(int numberOfHits, int numberOfSteps, int numberOfGames, int numberOfWins) {
+        this.numberOfHits = numberOfHits;
+        this.numberOfSteps = numberOfSteps;
+        this.numberOfGames = numberOfGames;
+        this.numberOfWins = numberOfWins;
     }
 
     public int getNumberOfHits() {

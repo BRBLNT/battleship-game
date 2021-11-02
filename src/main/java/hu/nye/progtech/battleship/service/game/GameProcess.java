@@ -1,7 +1,5 @@
 package hu.nye.progtech.battleship.service.game;
 
-import java.lang.instrument.ClassDefinition;
-
 import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.model.OpponentAI;
 import hu.nye.progtech.battleship.model.Player;

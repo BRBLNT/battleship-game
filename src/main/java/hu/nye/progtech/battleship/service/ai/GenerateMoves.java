@@ -16,46 +16,37 @@ public class GenerateMoves {
 
     private static boolean randomTwoOption() {
         int num = (int) ((Math.random() * 100) + 1);
-        if (num % 2 == 0) {
-            return true;
-        }
-        return false;
+        return num % 2 == 0;
 
     }
 
-    private static int generateX(OpponentAI bot) {
+    private static int generateX() {
         return (int) (Math.random() * size);
     }
 
-    private static int generateY(OpponentAI bot) {
+    private static int generateY() {
         return (int) (Math.random() * size);
     }
 
     private static boolean notHitBefore(OpponentAI bot, int x, int y) {
         boolean[][] hits = bot.getHits();
-        if (hits[x][y]) {
-            return false;
-        }
-        return true;
+        return !hits[x][y];
     }
 
     private static boolean hit(Player p, int x, int y) {
-        if (p.getBoard().getMatrixForBoard()[x][y] == '1') {
-            return true;
-        }
-        return false;
+        return p.getBoard().getMatrixForBoard()[x][y] == '1';
     }
 
     /**
      * If bot is the next choose coordinate checks not hit before and when it is a hit choose a +-1 cord.
      */
     public static boolean botStep(Player p, OpponentAI bot) {
-        int x = generateX(bot);
-        int y = generateY(bot);
+        int x = generateX();
+        int y = generateY();
         if (!notHitBefore(bot, x, y)) {
             do {
-                x = generateX(bot);
-                y = generateY(bot);
+                x = generateX();
+                y = generateY();
             } while (!notHitBefore(bot, x, y));
         }
         Board temp = p.getBoard();

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import hu.nye.progtech.battleship.model.Board;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class MapReader {
     private static Board board;
     private static final int DEFAULT_SIZE = 10;
     private static final String NAME_OF_MAP_FILE = "ai/boards.txt";
-    private static List<String> lines = new ArrayList();
+    private static ArrayList<String> lines = new ArrayList<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(MapReader.class);
 
 
@@ -28,13 +28,13 @@ public class MapReader {
     private static void readMapDefaultSize() {
         board = new Board(DEFAULT_SIZE);
         upload(NAME_OF_MAP_FILE);
-        int random = (int) (Math.random() * lines.size()) + 0;
+        int random = (int) (Math.random() * lines.size());
         board.setMatrixForBoard(mapFormatter(lines.get(random)));
     }
 
     private static void upload(String file) {
         LOGGER.info("read board for bot");
-        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(NAME_OF_MAP_FILE);
+        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(file);
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line;

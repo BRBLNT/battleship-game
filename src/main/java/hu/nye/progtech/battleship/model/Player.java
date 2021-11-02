@@ -18,7 +18,7 @@ public class Player extends Statistics {
     private Board cleanBoard;
 
     public Player(Board board, int numberOfShips) {
-        super();
+        super(0, 0, 0, 0);
         this.board = board;
         this.numberOfShips = numberOfShips;
         ships = new ArrayList<>();
@@ -94,13 +94,13 @@ public class Player extends Statistics {
         Player player = (Player) o;
         return numberOfShips == player.numberOfShips && Objects.equals(board, player.board) &&
                 Objects.equals(name, player.name) && Objects.equals(ships, player.ships) &&
-                Arrays.equals(hits, player.hits);
+                Arrays.deepEquals(hits, player.hits);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(board, numberOfShips, name, ships);
-        result = 31 * result + Arrays.hashCode(hits);
+        result = 31 * result + Arrays.deepHashCode(hits);
         return result;
     }
 

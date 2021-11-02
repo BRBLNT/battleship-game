@@ -82,13 +82,13 @@ public class OpponentAI {
         OpponentAI that = (OpponentAI) o;
         return numberOfShips == that.numberOfShips && Objects.equals(board, that.board) &&
                 Objects.equals(name, that.name) && Objects.equals(ships, that.ships) &&
-                Arrays.equals(hits, that.hits);
+                Arrays.deepEquals(hits, that.hits);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(board, numberOfShips, name, ships);
-        result = 31 * result + Arrays.hashCode(hits);
+        result = 31 * result + Arrays.deepHashCode(hits);
         return result;
     }
 

@@ -55,7 +55,7 @@ public final class Ship {
             return false;
         }
         Ship ship = (Ship) o;
-        return size == ship.size && posX == ship.posX && posY == ship.posY;
+        return size == ship.size && posX.equals(ship.posX) && posY.equals(ship.posY);
     }
 
     @Override

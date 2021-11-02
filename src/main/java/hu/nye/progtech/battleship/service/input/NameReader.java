@@ -27,13 +27,13 @@ public class NameReader {
         if (names.isEmpty()) {
             return DEFAULT_NAME;
         }
-        int random = (int) (Math.random() * names.size()) + 0;
+        int random = (int) (Math.random() * names.size());
         return names.get(random);
     }
 
     private static void upload(String file) {
 
-        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(NAME_OF_NAMES_FILE);
+        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(file);
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line = null;
