@@ -11,19 +11,14 @@ import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 /**
  * Unit tests for {@link HighScoreTable}.
  */
-@ExtendWith(MockitoExtension.class)
 public class HighScoreTableTest {
 
     final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
     private HighScoreTable underTest;
-    @Mock
     private static ArrayList<Player> p;
     private Board b;
     private ConfigReader cr;
@@ -32,9 +27,9 @@ public class HighScoreTableTest {
                       "=============================" +
                     "\r\n||  Name           |  Wins ||" +
                     "\r\n=============================" +
-                    "\r\n||Player1          |1      ||" +
+                    "\r\n||Player1          |3      ||" +
                     "\r\n=============================" +
-                    "\r\n||Player2          |3      ||" +
+                    "\r\n||Player2          |1      ||" +
                     "\r\n=============================\r\n";
 
 
@@ -44,13 +39,13 @@ public class HighScoreTableTest {
         underTest = new HighScoreTable();
         p = new ArrayList<>();
         b = new Board(10);
-        cr = new ConfigReader("config.properties");
+        cr = new ConfigReader("");
         Player temp = new Player(b, 5);
         Player temp2 = new Player(b, 5);
         temp.setName("Player1");
         temp2.setName("Player2");
-        temp.setNumberOfWins(1);
-        temp2.setNumberOfWins(3);
+        temp.setNumberOfWins(3);
+        temp2.setNumberOfWins(1);
         p.add(temp);
         p.add(temp2);
         System.setOut(new PrintStream(myOut));

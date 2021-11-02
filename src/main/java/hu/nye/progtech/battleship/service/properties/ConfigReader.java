@@ -17,7 +17,7 @@ public final class ConfigReader {
     private static String NAME_PROPERTIES_FILE = "config.properties";
 
     public ConfigReader(String config) throws ConfigurationNotFoundException {
-        if (config.length() < 1) {
+        if (config.length() > 3) {
             readProperties(config);
         } else {
             readProperties();
@@ -28,7 +28,7 @@ public final class ConfigReader {
         try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(NAME_PROPERTIES_FILE)) {
             PROP.load(input);
             LOGGER.info("read config file successfully!");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             LOGGER.error("configuration is missing!");
             throw new ConfigurationNotFoundException("Cannot load configuration file! Failed to start game!");
         }
@@ -38,7 +38,7 @@ public final class ConfigReader {
         try (InputStream input = ConfigReader.class.getClassLoader().getResourceAsStream(config)) {
             PROP.load(input);
             LOGGER.info("read config file successfully!");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             LOGGER.error("configuration is missing!");
             throw new ConfigurationNotFoundException("Cannot load configuration file! Failed to start game!");
         }

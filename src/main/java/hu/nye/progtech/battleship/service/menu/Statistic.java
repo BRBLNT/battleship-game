@@ -14,8 +14,9 @@ public final class Statistic {
      */
     public static void printStat(Player p) {
         //null set array
-        //HighScoreTable.printHighScoreTable(null);
-        PrintWrapper.printLine("Not working. Try it later...");
+        //Arrays.sort();
+        HighScoreTable.printHighScoreTable(null);
+        //PrintWrapper.printLine("Not working. Try it later...");
         MenuController.chooseMenu(p);
     }
 }

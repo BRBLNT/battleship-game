@@ -75,7 +75,12 @@ public final class MenuController {
         String command;
         boolean run = true;
         do {
-            command = UserInputReader.readInput().toUpperCase();
+            command = UserInputReader.readInput();
+            if (command == null) {
+                run = false;
+                break;
+            }
+            command = command.toUpperCase();
             if (command.equals(startGame)) {
                 LOGGER.info("choose start");
                 StartGame.startGame(player);

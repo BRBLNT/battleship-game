@@ -9,7 +9,7 @@ import hu.nye.progtech.battleship.service.properties.ConfigReader;
 /**
  * Player implementation.
  */
-public class Player extends Statistics {
+public class Player extends Statistics implements Comparable<Player> {
     private Board board;
     private final int numberOfShips;
     private String name;
@@ -113,5 +113,13 @@ public class Player extends Statistics {
                 ", ships=" + ships +
                 ", hits=" + Arrays.toString(hits) +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        int thisPlayer = this.getNumberOfWins();
+        Player temp = o;
+        int otherPlayer = temp.getNumberOfWins();
+        return otherPlayer - thisPlayer;
     }
 }
