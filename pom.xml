@@ -48,8 +48,6 @@
             <version>5.3.12</version>
         </dependency>
 
-
-
     </dependencies>
 
 
@@ -108,6 +106,7 @@
                         <exclude>hu/nye/progtech/battleship/Main.*</exclude>
                         <exclude>hu/nye/progtech/battleship/model/*</exclude>
                         <exclude>hu/nye/progtech/battleship/service/exception/*</exclude>
+                        <exclude>hu/nye/progtech/battleship/service/menu/Exit.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

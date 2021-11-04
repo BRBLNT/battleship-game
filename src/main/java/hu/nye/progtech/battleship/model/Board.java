@@ -55,7 +55,7 @@ public final class Board {
     @Override
     public String toString() {
         return "Board{" +
-                "matrixForBoard=" + Arrays.toString(matrixForBoard) +
+                "matrixForBoard=" + Arrays.deepToString(matrixForBoard) +
                 ", cellsTitleHorizontal=" + cellsTitleHorizontal +
                 ", cellsTitleVertical=" + cellsTitleVertical +
                 '}';

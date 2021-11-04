@@ -18,29 +18,35 @@ public class MapReader {
 
     private static Board board;
     private static final int DEFAULT_SIZE = 10;
-    private static final String NAME_OF_MAP_FILE = "ai/boards.txt";
+    private static String nameOfMapFile = "ai/boards.txt";
     private static ArrayList<String> lines = new ArrayList<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(MapReader.class);
 
+    public static String getNameOfMapFile() {
+        return nameOfMapFile;
+    }
 
+    public static void setNameOfMapFile(String nameOfMapFile) {
+        MapReader.nameOfMapFile = nameOfMapFile;
+    }
 
     private static void readMapDefaultSize() {
         board = new Board(DEFAULT_SIZE);
-        upload(NAME_OF_MAP_FILE);
+        upload(nameOfMapFile);
         int random = (int) (Math.random() * lines.size());
         board.setMatrixForBoard(mapFormatter(lines.get(random)));
     }
 
     private static void upload(String file) {
         LOGGER.info("read board for bot");
-        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(file);
         try {
+            InputStream is = MapReader.class.getClassLoader().getResourceAsStream(file);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             LOGGER.error("no boards file");
         }
     }

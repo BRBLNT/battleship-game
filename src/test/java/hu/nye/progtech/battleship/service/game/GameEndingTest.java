@@ -6,7 +6,6 @@ import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**

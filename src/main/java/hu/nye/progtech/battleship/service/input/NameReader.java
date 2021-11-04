@@ -15,15 +15,23 @@ import org.slf4j.LoggerFactory;
  */
 public class NameReader {
     private static final ArrayList<String> names = new ArrayList<>();
-    private static final String NAME_OF_NAMES_FILE = "ai/names.txt";
+    private static String nameOfNamesFile = "ai/names.txt";
     private static final Logger LOGGER = LoggerFactory.getLogger(NameReader.class);
     private static final String DEFAULT_NAME = "Alejandro Sosa";
+
+    public static String getNameOfNamesFile() {
+        return nameOfNamesFile;
+    }
+
+    public void setNameOfNamesFile(String nameOfNamesFile) {
+        this.nameOfNamesFile = nameOfNamesFile;
+    }
 
     /**
      * Read a random name for the bot from a txt.
      */
     public static String readRandomNameForTheBot() {
-        upload(NAME_OF_NAMES_FILE);
+        upload(nameOfNamesFile);
         if (names.isEmpty()) {
             return DEFAULT_NAME;
         }
@@ -32,16 +40,17 @@ public class NameReader {
     }
 
     private static void upload(String file) {
-
-        InputStream is = MapReader.class.getClassLoader().getResourceAsStream(file);
         try {
+            InputStream is = MapReader.class.getClassLoader().getResourceAsStream(file);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 names.add(line);
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             LOGGER.error("no names file use default name");
         }
     }
+
+
 }
