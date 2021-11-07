@@ -1,9 +1,6 @@
 package hu.nye.progtech.battleship.service.validate;
 
-import java.util.Locale;
-
 import hu.nye.progtech.battleship.model.Player;
-import hu.nye.progtech.battleship.service.exception.TargetPositionNotValid;
 
 /**
  * During the game this class checks players input coordinate.

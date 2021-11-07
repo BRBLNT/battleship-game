@@ -34,6 +34,7 @@ public class GenerateMoves {
     }
 
     private static boolean hit(Player p, int x, int y) {
+        System.out.println(x + " " + y);
         return p.getBoard().getMatrixForBoard()[x][y] == '1';
     }
 
@@ -43,7 +44,7 @@ public class GenerateMoves {
     public static boolean botStep(Player p, OpponentAI bot) {
         int x = generateX();
         int y = generateY();
-        if (!notHitBefore(bot, x, y)) {
+        if (!notHitBefore(bot, x, y) || x >= size || y >= size) {
             do {
                 x = generateX();
                 y = generateY();
@@ -57,13 +58,13 @@ public class GenerateMoves {
             boolean run = true;
             do {
                 if (randomTwoOption()) {
-                    if (randomTwoOption()) {
+                    if (randomTwoOption() || x == 9) {
                         x = x - 1;
                     } else {
                         x = x + 1;
                     }
                 } else {
-                    if (randomTwoOption()) {
+                    if (randomTwoOption() || y == 9) {
                         y = y - 1;
                     } else {
                         y = y + 1;
