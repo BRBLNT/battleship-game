@@ -8,6 +8,7 @@ import com.indvd00m.ascii.render.elements.PseudoText;
 import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
+import hu.nye.progtech.battleship.service.input.UserInput;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.menu.MenuController;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
@@ -19,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GameController {
 
-    private static UserInputReader uir;
+    private static UserInput uir;
     private static ConfigReader CR;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GameController.class);
@@ -43,7 +44,7 @@ public class GameController {
     /**
      * Init properties file and set menu commands.
      */
-    public static void init(String config, UserInputReader uirp) {
+    public GameController(String config, UserInput userInputReader) {
         try {
             CR = new ConfigReader(config);
         } catch (ConfigurationNotFoundException e) {
@@ -56,11 +57,13 @@ public class GameController {
         MenuController.setExit(CR.getPropertyFromConfig("game.control.exit"));
         MenuController.setHs(CR.getPropertyFromConfig("game.control.hs"));
         player = createPlayer();
-        uir = uirp;
+        uir = userInputReader;
         welcomeText();
         LOGGER.info("initialization");
-        MenuController.chooseMenu(player);
+    }
 
+    public void start() {
+        MenuController.chooseMenu(player);
     }
 
     private static Player createPlayer() {

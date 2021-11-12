@@ -1,9 +1,9 @@
 package hu.nye.progtech.battleship;
 
-import java.util.Scanner;
 
 import hu.nye.progtech.battleship.service.game.GameController;
-import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Entry point of the game.
@@ -15,8 +15,9 @@ public class Main {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        GameController gl = new GameController();
-        GameController.init("config.properties", new UserInputReader(new Scanner(System.in)));
+        ApplicationContext context = new AnnotationConfigApplicationContext("hu.nye.progtech.battleship");
+        GameController gameController = context.getBean(GameController.class);
+        gameController.start();
     }
 
 

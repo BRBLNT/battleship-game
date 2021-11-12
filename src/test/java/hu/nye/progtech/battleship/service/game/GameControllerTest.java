@@ -3,7 +3,6 @@ package hu.nye.progtech.battleship.service.game;
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 
-import hu.nye.progtech.battleship.service.input.UserInput;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import org.junit.jupiter.api.Test;
 
@@ -20,12 +19,10 @@ public class GameControllerTest {
     @Test
     public void testInitNotThrownExceptionWhileInitTheGame() {
         //given
-        underTest = new GameController();
         ByteArrayInputStream in = new ByteArrayInputStream(COMMAND.getBytes());
         System.setIn(in);
-        uirp = new UserInputReader(new Scanner(System.in));
         //when
-        underTest.init(CONFIG, uirp);
+        underTest = new GameController("", new UserInputReader(new Scanner(System.in)));
         //then - no exception
     }
 }

@@ -7,6 +7,7 @@ import hu.nye.progtech.battleship.service.ai.GenerateMoves;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.service.validate.ValidateHit;
+import hu.nye.progtech.battleship.ui.draw.Draw;
 import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDrawImpl;
 
@@ -14,7 +15,7 @@ import hu.nye.progtech.battleship.ui.draw.impl.CommandLineDrawImpl;
  * This class manage game process.
  */
 public class GameProcess {
-    private static final CommandLineDrawImpl CLDI = new CommandLineDrawImpl();
+    private static final Draw CLDI = new CommandLineDrawImpl();
     private static Player player;
     private static OpponentAI ai;
 
