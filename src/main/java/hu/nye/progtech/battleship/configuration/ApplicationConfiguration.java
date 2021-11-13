@@ -7,6 +7,9 @@ import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Spring configuration.
+ */
 @Configuration
 public class ApplicationConfiguration {
 
