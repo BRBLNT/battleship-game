@@ -1,6 +1,7 @@
 package hu.nye.progtech.battleship.service.game;
 
 import hu.nye.progtech.battleship.model.Board;
+import hu.nye.progtech.battleship.model.GameState;
 import hu.nye.progtech.battleship.model.OpponentAI;
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.ai.GenerateMoves;
@@ -21,6 +22,7 @@ public class GameProcess {
 
     private static int boardSize;
     private static boolean[][] hits;
+    private static GameState actualGame;
 
     /**
      * Store who step last for check who win.
@@ -33,6 +35,7 @@ public class GameProcess {
      * Init participnats.
      */
     public static void initParticipants(Player p, OpponentAI oai) {
+        actualGame = new GameState();
         player = p;
         ai = oai;
         boardSize = Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.board.size"));
@@ -42,6 +45,11 @@ public class GameProcess {
                 hits[i][j] = false;
             }
         }
+    }
+
+    private static void save() {
+        actualGame.setBot(ai);
+        actualGame.setPlayer(player);
     }
 
     /**
@@ -82,6 +90,7 @@ public class GameProcess {
         if (win(ai.getBoard()) && lastStep) {
             GameEnding.win(player);
         }
+        save();
         botStep();
     }
 
@@ -94,6 +103,7 @@ public class GameProcess {
                 GameEnding.lose(player);
             }
             if (!GenerateMoves.botStep(player, ai)) {
+                save();
                 playerStep();
                 break;
             }
