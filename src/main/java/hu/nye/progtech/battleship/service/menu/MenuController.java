@@ -2,6 +2,9 @@ package hu.nye.progtech.battleship.service.menu;
 
 import static hu.nye.progtech.battleship.service.menu.Exit.exit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
@@ -21,6 +24,16 @@ public final class MenuController {
     private static String setShips;
     private static String hs;
     private static String exit;
+    private static ArrayList<Player> playerList;
+
+    public static ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public static void setPlayerList(ArrayList<Player> playerList) {
+        MenuController.playerList = playerList;
+    }
+
     private static boolean isShipsSet = false;
 
     public static void setIsShipsSet(boolean isShipsSet) {
@@ -95,7 +108,7 @@ public final class MenuController {
                 run = false;
             } else if (command.equals(hs)) {
                 LOGGER.info("choose highscore");
-                Statistic.printStat(player);
+                Statistic.printStat(playerList, player);
                 run = false;
             } else if (command.equals(exit)) {
                 LOGGER.info("choose exit");

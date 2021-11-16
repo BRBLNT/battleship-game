@@ -22,7 +22,7 @@ public class GameControllerTest {
         ByteArrayInputStream in = new ByteArrayInputStream(COMMAND.getBytes());
         System.setIn(in);
         //when
-        underTest = new GameController("", new UserInputReader(new Scanner(System.in)));
+        underTest = new GameController("", new UserInputReader(new Scanner(System.in)), null);
         //then - no exception
     }
 }

@@ -1,5 +1,11 @@
 package hu.nye.progtech.battleship.service.game;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.indvd00m.ascii.render.Render;
 import com.indvd00m.ascii.render.api.ICanvas;
 import com.indvd00m.ascii.render.api.IContextBuilder;
@@ -7,9 +13,10 @@ import com.indvd00m.ascii.render.api.IRender;
 import com.indvd00m.ascii.render.elements.PseudoText;
 import hu.nye.progtech.battleship.model.Board;
 import hu.nye.progtech.battleship.model.Player;
+import hu.nye.progtech.battleship.persistance.SavePlayersToRepository;
+import hu.nye.progtech.battleship.persistance.impl.SavePlayersToRepositoryJDBC;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
 import hu.nye.progtech.battleship.service.input.UserInput;
-import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
 import hu.nye.progtech.battleship.service.menu.MenuController;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import org.slf4j.Logger;
@@ -21,7 +28,9 @@ import org.slf4j.LoggerFactory;
 public class GameController {
 
     private static UserInput uir;
-    private static ConfigReader CR;
+    private static ConfigReader cr;
+    private static SavePlayersToRepository db;
+    private static ArrayList<Player> players;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GameController.class);
     private static Player player;
@@ -44,31 +53,38 @@ public class GameController {
     /**
      * Init properties file and set menu commands.
      */
-    public GameController(String config, UserInput userInputReader) {
+    public GameController(String config, UserInput userInputReader, Connection connection) {
         try {
-            CR = new ConfigReader(config);
+            cr = new ConfigReader(config);
         } catch (ConfigurationNotFoundException e) {
             e.printStackTrace();
             System.exit(1);
         }
-        MenuController.setSetName(CR.getPropertyFromConfig("game.control.set.name"));
-        MenuController.setStartGame(CR.getPropertyFromConfig("game.control.start"));
-        MenuController.setSetShips(CR.getPropertyFromConfig("game.control.set.ship"));
-        MenuController.setExit(CR.getPropertyFromConfig("game.control.exit"));
-        MenuController.setHs(CR.getPropertyFromConfig("game.control.hs"));
+        MenuController.setSetName(cr.getPropertyFromConfig("game.control.set.name"));
+        MenuController.setStartGame(cr.getPropertyFromConfig("game.control.start"));
+        MenuController.setSetShips(cr.getPropertyFromConfig("game.control.set.ship"));
+        MenuController.setExit(cr.getPropertyFromConfig("game.control.exit"));
+        MenuController.setHs(cr.getPropertyFromConfig("game.control.hs"));
         player = createPlayer();
         uir = userInputReader;
         welcomeText();
+        try {
+            db = new SavePlayersToRepositoryJDBC(connection);
+            players = (ArrayList<Player>) db.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         LOGGER.info("initialization");
     }
 
     public void start() {
+        MenuController.setPlayerList(players);
         MenuController.chooseMenu(player);
     }
 
     private static Player createPlayer() {
-        return new Player(new Board(Integer.parseInt(CR.getPropertyFromConfig("board.setting.board.size"))),
-                Integer.parseInt(CR.getPropertyFromConfig("board.setting.numberofships")));
+        return new Player(new Board(Integer.parseInt(cr.getPropertyFromConfig("board.setting.board.size"))),
+                Integer.parseInt(cr.getPropertyFromConfig("board.setting.numberofships")));
     }
 
 

@@ -14,3 +14,5 @@ UPDATE game_saves SET wins = WHERE name = ;
 DELETE FROM game_saves WHERE name = ;
 
 INSERT INTO game_saves (name, wins) VALUES (name, wins);
+
+SELECT * FROM game_saves ORDER BY WINS DESC;
