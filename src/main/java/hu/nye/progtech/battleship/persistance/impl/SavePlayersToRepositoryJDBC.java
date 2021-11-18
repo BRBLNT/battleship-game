@@ -1,6 +1,8 @@
 package hu.nye.progtech.battleship.persistance.impl;
 
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +36,7 @@ public class SavePlayersToRepositoryJDBC implements SavePlayersToRepository, Aut
             "    wins int NOT NULL\n" +
             ");";
 
-    private Connection connection;
+    private static Connection connection;
 
     private List<Player> players;
 
@@ -52,7 +54,39 @@ public class SavePlayersToRepositoryJDBC implements SavePlayersToRepository, Aut
 
     @Override
     public void save(Player player) {
+        try {
+            if (playerIsExistInDB(player)) {
+                try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STATEMENT)) {
+                    preparedStatement.setInt(1, player.getNumberOfWins());
+                    preparedStatement.setString(2, player.getName());
+                    int i = preparedStatement.executeUpdate();
+                }
+            } else {
+                try (PreparedStatement preparedStatement = connection.prepareStatement(INSERT_STATEMENT)) {
+                    preparedStatement.setInt(2, player.getNumberOfWins());
+                    preparedStatement.setString(1, player.getName());
+                    int i = preparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.warn("sql" + e);
+            System.out.println(e);
+        }
+    }
 
+    private static boolean playerIsExistInDB(Player player) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STATEMENT)) {
+            preparedStatement.setString(1, player.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int counter = -1;
+            while (resultSet.next()) {
+                counter++;
+            }
+            if (counter != 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

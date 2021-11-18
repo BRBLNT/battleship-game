@@ -14,7 +14,7 @@ public class PlayerIsExist {
      */
     public static int numberOfWinsSet(Player p, ArrayList<Player> players) {
         int wins = 0;
-        for (Player temp: players) {
+        for (Player temp : players) {
             if (p.getName().equals(temp.getName())) {
                 wins = temp.getNumberOfWins();
                 break;

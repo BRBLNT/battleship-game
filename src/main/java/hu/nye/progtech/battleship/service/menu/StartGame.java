@@ -1,8 +1,12 @@
 package hu.nye.progtech.battleship.service.menu;
 
 import hu.nye.progtech.battleship.model.Player;
+import hu.nye.progtech.battleship.persistance.SavePlayersToRepository;
+import hu.nye.progtech.battleship.persistance.impl.SavePlayersToRepositoryJDBC;
 import hu.nye.progtech.battleship.service.ai.GenerateOpponent;
+import hu.nye.progtech.battleship.service.game.GameController;
 import hu.nye.progtech.battleship.service.game.GameProcess;
+import hu.nye.progtech.battleship.service.players.PlayerIsExist;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
 
@@ -10,7 +14,6 @@ import hu.nye.progtech.battleship.ui.draw.PrintWrapper;
  * Start game menu.
  */
 public final class StartGame {
-
     /**
      * Start game if everything is set.
      */
@@ -22,7 +25,12 @@ public final class StartGame {
             PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.ship.notset"));
             MenuController.chooseMenu(player);
         } else {
-            //add player to DB
+            int wins = PlayerIsExist.numberOfWinsSet(player, MenuController.getPlayerList());
+            if (wins != 0) {
+                player.setNumberOfWins(wins);
+            } else {
+                GameController.savePlayer(player);
+            }
             GameProcess.initParticipants(player, GenerateOpponent.generate());
             GameProcess.game();
         }

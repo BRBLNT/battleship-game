@@ -60,13 +60,13 @@ public class GenerateMoves {
                 if (randomTwoOption()) {
                     if (randomTwoOption() || x == 9) {
                         x = x - 1;
-                    } else {
+                    } else if (!randomTwoOption() || x == 0) {
                         x = x + 1;
                     }
                 } else {
                     if (randomTwoOption() || y == 9) {
                         y = y - 1;
-                    } else {
+                    } else if (!randomTwoOption() || y == 0) {
                         y = y + 1;
                     }
                 }

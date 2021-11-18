@@ -82,6 +82,10 @@ public class GameController {
         MenuController.chooseMenu(player);
     }
 
+    public static void savePlayer(Player p) {
+        db.save(p);
+    }
+
     private static Player createPlayer() {
         return new Player(new Board(Integer.parseInt(cr.getPropertyFromConfig("board.setting.board.size"))),
                 Integer.parseInt(cr.getPropertyFromConfig("board.setting.numberofships")));
