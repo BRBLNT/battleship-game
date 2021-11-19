@@ -12,7 +12,13 @@ public class LoadGame {
     private Player playerLoaded;
     private OpponentAI botLoaded;
 
+    public void setPlayerLoaded(Player playerLoaded) {
+        this.playerLoaded = playerLoaded;
+    }
 
+    public void setBotLoaded(OpponentAI botLoaded) {
+        this.botLoaded = botLoaded;
+    }
 
     public void loadGameToGameState() {
         GameProcess.initParticipants(playerLoaded, botLoaded);
