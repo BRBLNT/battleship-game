@@ -33,7 +33,7 @@ public class LoadGameTest {
         underTest.setBotLoaded(ai);
         underTest.setPlayerLoaded(p);
         try {
-            underTest.loadGameToGameState();
+            underTest.loadGameFromGameState(p);
         } catch (Exception e) {
             excp = true;
         }

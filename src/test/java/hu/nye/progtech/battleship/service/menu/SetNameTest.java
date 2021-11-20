@@ -29,7 +29,7 @@ public class SetNameTest {
         p = new Player(new Board(Integer.parseInt(cr.getPropertyFromConfig("board.setting.board.size"))),
                 Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.numberofships")));
         p.setName("");
-        ByteArrayInputStream in = new ByteArrayInputStream(WRONG_NAME.getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream(NAME.getBytes());
         System.setIn(in);
         uir = new UserInputReader(new Scanner(System.in));
         //when
@@ -48,7 +48,7 @@ public class SetNameTest {
         cr = new ConfigReader("");
         p = new Player(new Board(Integer.parseInt(cr.getPropertyFromConfig("board.setting.board.size"))),
                 Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.numberofships")));
-        p.setName("NAME");
+        p.setName("NAMENAME");
         ByteArrayInputStream in = new ByteArrayInputStream(WRONG_NAME.getBytes());
         System.setIn(in);
         uir = new UserInputReader(new Scanner(System.in));

@@ -58,15 +58,15 @@ public class GenerateMoves {
             boolean run = true;
             do {
                 if (randomTwoOption()) {
-                    if (randomTwoOption() || x == 9) {
+                    if ((randomTwoOption() || x == 9) && x  != 0) {
                         x = x - 1;
-                    } else if (!randomTwoOption() || x == 0) {
+                    } else {
                         x = x + 1;
                     }
                 } else {
-                    if (randomTwoOption() || y == 9) {
+                    if ((randomTwoOption() || y == 9) && y  != 0) {
                         y = y - 1;
-                    } else if (!randomTwoOption() || y == 0) {
+                    } else {
                         y = y + 1;
                     }
                 }

@@ -65,6 +65,7 @@ public class GameController {
         MenuController.setSetShips(cr.getPropertyFromConfig("game.control.set.ship"));
         MenuController.setExit(cr.getPropertyFromConfig("game.control.exit"));
         MenuController.setHs(cr.getPropertyFromConfig("game.control.hs"));
+        MenuController.setLoadGame(cr.getPropertyFromConfig("game.control.load"));
         player = createPlayer();
         uir = userInputReader;
         welcomeText();

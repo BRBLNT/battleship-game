@@ -24,6 +24,7 @@ public final class MenuController {
     private static String setShips;
     private static String hs;
     private static String exit;
+    private static String loadGame;
     private static ArrayList<Player> playerList;
 
     public static ArrayList<Player> getPlayerList() {
@@ -64,6 +65,10 @@ public final class MenuController {
         MenuController.hs = hs;
     }
 
+    public static void setLoadGame(String loadGame) {
+        MenuController.loadGame = loadGame;
+    }
+
     private static void menuText() {
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.choose"));
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
@@ -74,6 +79,8 @@ public final class MenuController {
                 setShips + " " + ConfigReader.getPropertyFromConfig("game.text.set.ship"));
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
                 hs + " " + ConfigReader.getPropertyFromConfig("game.text.geths"));
+        PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
+                loadGame + " " + ConfigReader.getPropertyFromConfig("game.text.load"));
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.type") + " " +
                 exit + " " + ConfigReader.getPropertyFromConfig("game.text.exit"));
 
@@ -109,6 +116,9 @@ public final class MenuController {
             } else if (command.equals(hs)) {
                 LOGGER.info("choose highscore");
                 Statistic.printStat(playerList, player);
+                run = false;
+            } else if (command.equals(loadGame)) {
+                LoadGame.loadGameFromGameState(player);
                 run = false;
             } else if (command.equals(exit)) {
                 LOGGER.info("choose exit");

@@ -1,5 +1,7 @@
 package hu.nye.progtech.battleship.persistance.impl;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,15 +12,23 @@ import hu.nye.progtech.battleship.persistance.SavePlayersToRepository;
 import hu.nye.progtech.battleship.service.exception.ConfigurationNotFoundException;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.test.util.ReflectionTestUtils;
 
 /**
  * Unit tests for {@link SavePlayersToRepositoryJDBC}
  */
 public class SavePlayersToRepositoryJDBCTest {
 
-    private SavePlayersToRepository underTest;
+    @Mock
+    private String wrongCommand = "SEL";
+    @InjectMocks
+    private SavePlayersToRepositoryJDBC underTest;
     private Connection connection;
     private ConfigReader cr;
+
 
 
     @Test
@@ -93,10 +103,6 @@ public class SavePlayersToRepositoryJDBCTest {
         underTest.save(temp);
         //then - exception
     }
-
-
-
-
 
 
 }
