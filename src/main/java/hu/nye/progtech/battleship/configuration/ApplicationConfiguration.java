@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfiguration {
 
-    @Bean
+    @Bean(initMethod = "start")
     public GameController gameController(String config, UserInputReader userInputReader, Connection connection) {
         return new GameController(config, userInputReader, connection);
     }

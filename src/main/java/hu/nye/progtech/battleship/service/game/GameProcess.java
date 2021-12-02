@@ -6,6 +6,7 @@ import hu.nye.progtech.battleship.model.OpponentAI;
 import hu.nye.progtech.battleship.model.Player;
 import hu.nye.progtech.battleship.service.ai.GenerateMoves;
 import hu.nye.progtech.battleship.service.input.imp.UserInputReader;
+import hu.nye.progtech.battleship.service.modify.FullShipHit;
 import hu.nye.progtech.battleship.service.properties.ConfigReader;
 import hu.nye.progtech.battleship.service.validate.ValidateHit;
 import hu.nye.progtech.battleship.ui.draw.Draw;
@@ -23,6 +24,7 @@ public class GameProcess {
     private static int boardSize;
     private static boolean[][] hits;
     private static GameState actualGame;
+    private static FullShipHit fullShipHit;
 
     /**
      * Store who step last for check who win.
@@ -38,6 +40,9 @@ public class GameProcess {
         actualGame = new GameState();
         player = p;
         ai = oai;
+        fullShipHit = new FullShipHit();
+        fullShipHit.setAi(ai);
+        fullShipHit.setPlayer(player);
         boardSize = Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.board.size"));
         hits = new boolean[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {
@@ -63,6 +68,8 @@ public class GameProcess {
     }
 
     private static void playerStep() {
+        ai.setBoard(fullShipHit.newBoardForAi());
+        player.setCleanBoard(fullShipHit.newBoardForPlayer());
         lastStep = true;
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.playerturn"));
         PrintWrapper.printSpace(2);
@@ -95,6 +102,8 @@ public class GameProcess {
     }
 
     private static void botStep() {
+        ai.setBoard(fullShipHit.newBoardForAi());
+        player.setCleanBoard(fullShipHit.newBoardForPlayer());
         lastStep = false;
         PrintWrapper.printLine(ConfigReader.getPropertyFromConfig("game.text.botturn"));
         PrintWrapper.printSpace(2);
