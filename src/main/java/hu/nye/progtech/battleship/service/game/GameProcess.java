@@ -43,6 +43,7 @@ public class GameProcess {
         fullShipHit = new FullShipHit();
         fullShipHit.setAi(ai);
         fullShipHit.setPlayer(player);
+        fullShipHit.init();
         boardSize = Integer.parseInt(ConfigReader.getPropertyFromConfig("board.setting.board.size"));
         hits = new boolean[boardSize][boardSize];
         for (int i = 0; i < boardSize; i++) {

@@ -23,6 +23,7 @@ public class GameControllerTest {
         System.setIn(in);
         //when
         underTest = new GameController("", new UserInputReader(new Scanner(System.in)), null);
+        underTest.start();
         //then - no exception
     }
 }

@@ -24,7 +24,6 @@ public class FullShipHit {
 
     public static void init() {
         addShipsToListPlayer(player, shipsPlayer);
-        addShipsToListAi(ai, shipsAI);
     }
 
     public static void setPlayer(Player playerP) {
@@ -85,10 +84,7 @@ public class FullShipHit {
         add(temp, boards);
     }
 
-    private static void addShipsToListAi(OpponentAI ai, ArrayList<Board> boards) {
-        ArrayList<Ship> temp = ai.getShips();
-        add(temp, boards);
-    }
+
 
     private static void add(ArrayList<Ship> temp, ArrayList<Board> boards) {
         for (Ship ship : temp) {
