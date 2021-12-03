@@ -17,10 +17,11 @@ public final class CoordinateConverter {
      */
     public int sizeCalculator(String pos) throws CoordinateFormatException {
         int size = -1;
+        String[] slices;
         if (pos.length() < 1 || pos.length() > 7) {
             throw new CoordinateFormatException("Wrong format");
         }
-        String[] slices = pos.split(":");
+        slices = pos.split(":");
         String posX = slices[0];
         String posY = slices[1];
         int posX1 = Integer.parseInt(String.valueOf(pvi.convertPosition(posX).split(":")[0]));
