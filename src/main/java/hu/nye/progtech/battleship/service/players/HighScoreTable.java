@@ -46,7 +46,7 @@ public class HighScoreTable {
             PrintWrapper.printMore(FIRST_SPACE - player.getName().length(), " ");
             PrintWrapper.print(VERTICAL_THIN_SEPARATOR);
             PrintWrapper.print("" + player.getNumberOfWins());
-            PrintWrapper.printMore(SECOND_SPACE - 1, " ");
+            PrintWrapper.printMore(SECOND_SPACE - ((int) (Math.log10(player.getNumberOfWins()) + 1)), " ");
             PrintWrapper.print(VERTICAL_THICK_SEPARATOR);
             PrintWrapper.printLine("");
             PrintWrapper.printMore(HORIZONTAL, HORIZONTAL_SEPARATOR);
