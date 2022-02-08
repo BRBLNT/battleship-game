@@ -82,7 +82,7 @@ public class SavePlayersToRepositoryJDBC implements SavePlayersToRepository, Aut
             while (resultSet.next()) {
                 counter++;
             }
-            if (counter != 0) {
+            if (counter == 0) {
                 return true;
             }
         }

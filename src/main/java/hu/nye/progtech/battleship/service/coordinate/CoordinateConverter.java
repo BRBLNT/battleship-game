@@ -18,7 +18,7 @@ public final class CoordinateConverter {
     public int sizeCalculator(String pos) throws CoordinateFormatException {
         int size = -1;
         String[] slices;
-        if (pos.length() < 1 || pos.length() > 7) {
+        if (pos.length() < 4 || pos.length() > 7) {
             throw new CoordinateFormatException("Wrong format");
         }
         slices = pos.split(":");

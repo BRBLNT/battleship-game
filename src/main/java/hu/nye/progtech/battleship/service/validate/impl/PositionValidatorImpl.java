@@ -23,7 +23,7 @@ public final class PositionValidatorImpl implements PositionValidator {
         boolean secondIsNumSecondPos = false;
         pos = pos.toUpperCase();
         String[] slices = pos.split(":");
-        if (slices.length < 2) {
+        if (slices.length < 2 || pos.length() < 5) {
             throw new CoordinateFormatException("Wrong format");
         }
         if (slices[0].length() > 3 || slices[0].length() <= 0) {
